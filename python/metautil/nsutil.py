@@ -9,6 +9,9 @@ def get_namespace(node):
         return ":"
     return ns
 
+def get_namespace_object(node):
+    return pm.Namespace(pm.PyNode(node).namespace())
+    
 def get_all_namespaces():
     ''' Returns a list of all namespaces.'''
     default_ns = pm.system.Namespace(':')

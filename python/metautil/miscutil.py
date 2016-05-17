@@ -1,15 +1,15 @@
 import pymel.core as pm
 import maya.cmds as cmds
-import metautil.nsutil as nsutil
+import metautil
 
 def import_into_namespace(path, ns):
-    ns = nsutil.get_unique_name(ns)
+    ns = metautil.get_unique_name(ns)
     cmds.file(path, i=1, type='mayaAscii', ns=ns, ra=1, options='v=0')
     return
     
 def get_project_data_dir():
     if not pm.optionVar(q='metaRiggingProjectDataDir'):
-        result = pm.optionVar(sv=('metaRiggingProjectDataDir', r'c:/metarigging/data/'))
+        result = pm.optionVar(sv=('metaRiggingProjectDataDir', r'c:/metarigging/python/data/'))
     else:
         result = pm.optionVar(q='metaRiggingProjectDataDir')
     return result
@@ -32,7 +32,7 @@ def find_bone(ns, side, type):
     side_index = get_bone_side_index(side)
     
     for bone in skeleton:
-        if bone.hasAttr('bProxy'):
+        if bone.hasAttr('bGrip'):
             continue
         bone_type = bone.getAttr('type', asString=1)
         if bone_type == 'Other':

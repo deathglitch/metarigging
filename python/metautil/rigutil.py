@@ -1,4 +1,15 @@
 import pymel.core as pm
+import metarig
+
+def create_core_metanode_graph(root_joint, type='character', name = None, object_id = None, base_dir = None, source_file_path = None):
+    #check root joint
+    #check for current meta_root
+    meta_root = metarig.MetaRoot.create(root_joint, type, name, object_id, base_dir, source_file_path)
+    #check for metaanimrender
+    metarender = metarig.MetaAnimRender.create(meta_root)
+    metarender.set_metanode_parent(meta_root)
+    
+    return metaroot
 
 def get_metaroot_from_root_joint(root_joint):
     return root_joint.listConnections(s=1, d=0, type='network')[0]
@@ -12,7 +23,7 @@ def get_metaroot(node):
         node = pm.ls(sl=1)[0]
         
     if node.hasAttr('meta_type'):
-        if node.meta_type.get() == 'metaroot':
+        if node.meta_type.get() == 'MetaRoot':
             return node
         else:
             metanode = node
@@ -20,28 +31,32 @@ def get_metaroot(node):
     if metanode is None:
         all_parents = pm.listConnections(node, type='network')
         for parent in all_parents:
-            if parent.hasAttr('meta_type') and parent.meta_type.get() == 'metaroot':
+            if parent.hasAttr('meta_type') and parent.meta_type.get() == 'MetaRoot':
                 return parent
             meta_parent = get_meta_parent(parent)
             if meta_parent != None:
                 metanode = meta_parent
-                
+
     if metanode:
-        if metanode.hasAttr('meta_type') and metanode.meta_type.get() == 'metaroot':
+        if metanode.hasAttr('meta_type') and metanode.meta_type.get() == 'MetaRoot':
             return metanode
         
         count = 0
         type = metanode.meta_type.get()
         parent = get_meta_parent(metanode)
-        while (type != 'metaroot') and (not parent) and (count < 100):
-            if (metanode.meta_type.get() == 'metaroot'):
+        while (type != 'MetaRoot') and (not parent) and (count < 100):
+            print 'getting more parents...'
+            if (metanode.meta_type.get() == 'MetaRoot'):
                 return metanode
             parent = get_meta_parent(parent)
             if not parent:
                 return None
             metanode = parent
             count += 1
-        return None
+        if (parent.meta_type.get() == 'MetaRoot'):
+            return parent
+        else:
+            return None
     return metaroot
     
 def get_all_metaroots():
@@ -49,7 +64,7 @@ def get_all_metaroots():
     nodes = pm.ls(type='network')
     for node in nodes:
         if node.hasAttr('meta_type'):
-            if node.meta_type.get() == 'metaroot':
+            if node.meta_type.get() == 'MetaRoot':
                 metaroots.append(node)
     return metaroots
     
@@ -65,15 +80,5 @@ def get_meta_parent(node):
         
     return meta_parent
     
-def connect_node_to_metanode(node, metanode, connection):
-    add_meta_parent_attr_to_node(node)
-    if not pm.hasAttr(metanode, connection):
-        pm.addAttr(metanode, sn=connection, dt='string')
-    metanode.attr(connection) >> node.meta_parent
-    return
-    
-def add_meta_parent_attr_to_node(node):
-    if not pm.hasAttr(node, 'meta_parent'):
-        pm.addAttr(node, sn='meta_parent', dt='string')
-    return
+
     

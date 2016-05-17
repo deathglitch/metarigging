@@ -1,23 +1,26 @@
 import pymel.core as pm
-import metarig.metarig as metarig
-import metautil.miscutil as miscutil
-import metautil.rigutil as rigutil
+import metarig
+import metautil
 import os
 
 def create_basic_rig(source_file, ns = 'rig'):
     pm.newFile(f=1)
     pm.namespace(set=':')
-    render_path = os.path.join(miscutil.get_project_data_dir(), source_file)
+    render_path = os.path.join(metautil.get_project_data_dir(), source_file)
     if render_path:
-        miscutil.import_into_namespace(render_path, ns)
-    root_joint = miscutil.find_bone(ns, 'center', 'root')
-    metaroot = rigutil.get_metaroot(root_joint)
+        metautil.import_into_namespace(render_path, ns)
+    root_joint = metautil.find_bone(ns, 'center', 'root')
+    metaroot = metautil.get_metaroot_from_root_joint(root_joint)
+
     #source_file_path = metaroot.source_file_path.get()
     pm.namespace(set=ns)
-    rig_object = metarig.MetaRig(metaroot)
-    rig = rig_object.get_metarig()
-    control_group = rig.get_ctrls_group()
-    do_not_touch_group = rig.get_do_not_touch_group()
+    rig_object = metarig.MetaAnimRig.create(metaroot)
+    print 'rig_object', rig_object
+    #rig = rig_object.get_metarig()
+    #control_group = rig.get_ctrls_group()
+    #do_not_touch_group = rig.get_do_not_touch_group()
     
-    return
+    #rig_object.finalize()
+    
+    return rig_object
     
