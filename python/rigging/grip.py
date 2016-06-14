@@ -4,8 +4,13 @@ import metautil
 class Grip():
     
     @staticmethod
-    def create_grip():
+    def create_grip(name_root):
         grip = None
+        pm.select(cl=True)
+        grip = pm.joint( n='gr_{0}'.format(name_root) )
+        add_box_shape(grip, 1)
+        pm.addAttr( grip, at='bool', ln='isGrip', dv=True)
+
         return grip
         
     @staticmethod
