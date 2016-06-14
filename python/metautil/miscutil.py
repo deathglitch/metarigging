@@ -14,6 +14,11 @@ def get_project_data_dir():
         result = pm.optionVar(q='metaRiggingProjectDataDir')
     return result
 
+def set_project_data_dir(project_path):
+    # format: c:/metarigging/python/data/
+    result = pm.optionVar(sv=('metaRiggingProjectDataDir', project_path))
+    return result
+    
 def get_bone_side_index(side):
     index = 3
     if side[0].lower() == 'c':
