@@ -59,6 +59,10 @@ class MetaNode(object):
                     result = children
         return result
         
+    def get_metanode_parent(self):
+        meta_parent = self.pynode.meta_parent.listConnections()
+        return meta_parent[0]
+        
     def set_metanode_parent(self, parent):
         parent_attr = parent.meta_children
         child_attr = self.meta_parent

@@ -21,6 +21,7 @@ def create_basic_rig(source_file, ns = 'rig'):
     #do_not_touch_group = rig.get_do_not_touch_group()
     
     #rig_object.finalize()
+    pm.namespace(set=':')
     
     return rig_object
     

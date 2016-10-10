@@ -70,7 +70,7 @@ from metaanimrender import *
 from metaanimrig import *
 from metanode_base import *
 from metaroot import *
-
+from gripmaterials import *
 
 #deleting classes, function, modules not in module
 for _function_name in [_member[0] for _member in inspect.getmembers(_module, inspect.isfunction) if not _member[1].__module__.startswith(__name__)]:

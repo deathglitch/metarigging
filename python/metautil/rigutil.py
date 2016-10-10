@@ -81,4 +81,6 @@ def get_meta_parent(node):
     return meta_parent
     
 
+def create_zero_transform(node):
+    pass
     
