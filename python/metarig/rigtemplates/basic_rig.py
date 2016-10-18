@@ -12,7 +12,6 @@ def create_basic_rig(source_file, ns = 'rig'):
     root_joint = metautil.find_bone(ns, 'center', 'root')
     meta_root = metautil.get_metaroot_from_root_joint(root_joint)
 
-    #source_file_path = metaroot.source_file_path.get()
     #source_file_path = meta_root.source_file_path.get()
     pm.namespace(set=ns)
     meta_rig = metarig.MetaAnimRig.create(meta_root)
