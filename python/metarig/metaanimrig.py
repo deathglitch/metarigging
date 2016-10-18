@@ -59,6 +59,10 @@ class MetaAnimRig(metanode.MetaNode):
     def get_all_group(self):
         return self.all_group.listConnections()[0]
         
+    def get_grips(self):
+		all_grips = pm.ls(self.namespace()+'*.isGrip', objectsOnly=True)
+		return [rigging.Grip(grip) for grip in all_grips]
+        
     def finalize(self):
         #display layer hookup
         return

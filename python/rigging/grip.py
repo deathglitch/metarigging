@@ -14,9 +14,16 @@ class Grip():
         self.pynode = node
     
     @staticmethod
-    def create_grip(node, name = '', add_zero = True):
+    def create(driven_node, name_prefix='gr_', name_root=None, strip_prefix=0, shape=None, zero_transform=True):
+        '''Creates a grip object matching the input driven_node. If no shape is specified a cube will be created.
+        '''
         grip = None
+        
+        #create joint transform
+        if name_root == None:
+            name_root = driven_node.stripNamespace();
         pm.select(cl=True)
+        '''
         node = pm.PyNode(node)
         grip = pm.joint( n='gr_{0}'.format(name) )
         add_box_shape(grip, 1)
@@ -28,6 +35,19 @@ class Grip():
         #pm.addAttr('grip_layer', sn='grip_layer', dt='string')
         grip.radius.set(keyable = False, channelBox = False)
         grip = Grip(grip)
+        '''
+        grip = pm.joint( n= '{0}{1}'.format(name_prefix, name_root) )
+        pm.addAttr( grip, at='bool', ln='isGrip', dv=True)
+        
+        #add shape node
+        if not shape:
+            shape = fit_box_shape(driven_node, 2)
+        
+        shape = swap_shape_node(grip, shape)
+        
+        if zero_transform:
+            create_zero_transform(grip);
+
         return grip
         
     @staticmethod
@@ -185,8 +205,52 @@ def fit_box_shape_ratio(node, width_ratio):
     box = fit_box_shape(node, width)
     return box
     
-def swap_shape_node(old_shape, node):
-    shape = pm.parent(pm.listRelatives(old_shape, pa=1, s=1), node, s=1, add=1)[0]
-    pm.delete(old_shape)
+def swap_shape_node(node, new_shape):
+    new_shape_node = new_shape.listRelatives(pa=1, s=1)
+    if not len(new_shape_node):
+        raise pm.MayaNodeError("Shape node not found on '{0}'".format(new_shape))
+    shape = pm.parent(new_shape_node[0], node, s=1, add=1)[0]
+    pm.delete(new_shape)
     return shape
+    
+    
+def create_zero_transform(node):
+    '''Creates a parent transform and sets the input node's transforms to zero.
+    '''
+    zero_transform = pm.group(em=True, n='{0}_zero'.format(node.stripNamespace() ) )
+    metautil.align_point_orient(zero_transform, node)
+    
+    #set parent
+    node_parent = node.getParent()
+    if node_parent:
+        zero_transform.setParent(node_parent)
+    node.setParent(zero_transform)
+    if isinstance(node, pm.nodetypes.Joint):
+        node.jointOrient.set([0,0,0])
+    
+    #markup connectoins
+    node.addAttr('zeroTransform', at='message')
+    zero_transform.addAttr('zeroNode', dt='string')
+    zero_transform.zeroNode >> node.zeroTransform
+    
+    
+def has_zero_transform(node):
+    '''Checks for a connected zero_transform.
+    '''
+    result = False
+    if node.hasAttr('zeroTransform'):
+        if node.zeroTransform.listConnections():
+            result = True
+    
+    return result
+    
+def get_zero_transform(node):
+    '''Gets the zero_transform connected to the input node.
+    '''
+    result = None
+    if has_zero_transform(node):
+        result = node.zeroTransform.listConnections()
+    
+    return result
+    
     
