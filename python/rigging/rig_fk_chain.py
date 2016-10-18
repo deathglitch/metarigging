@@ -15,9 +15,9 @@ def rig_fk_chain(start_joint, end_joint, root_zero_transform = True, children_ze
         name = miscutil.get_name_root(name).replace('_dupe', "")[2:]
         grip_node = ""
         if x == 0:
-            grip_node = grip.Grip.create_grip(joint, name = name, add_zero = root_zero_transform)
+            grip_node = grip.Grip.create(joint, name_root = name, zero_transform = root_zero_transform)
         else:
-            grip_node = grip.Grip.create_grip(joint, name = name, add_zero = children_zero_transforms)
+            grip_node = grip.Grip.create(joint, name_root = name, zero_transform = children_zero_transforms)
 
         const = pm.parentConstraint(grip_node, joint, w=1, mo=1)
         if last:
