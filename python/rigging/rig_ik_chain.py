@@ -58,12 +58,12 @@ def rig_ik_rp_chain(start_joint, end_joint, switch=False, ik_grip_orient = None,
     ik.rename('{0}_{1}_ikhandle'.format(side, region))
     ik.visibility.set(0)
     # create grips
-    ik_grip = grip.Grip.create_grip(end_joint, name = '{0}_{1}'.format(side, region))
+    ik_grip = grip.Grip.create(end_joint, name_root = '{0}_{1}'.format(side, region))
     #miscutil.align_point_orient(ik_grip, end_joint) #ik_grip is created and aligned to ik by default; this aligns it to the end_joint proper
     #pm.makeIdentity(ik_grip, apply=True, t=1, r=1, s=0, n=0)
     limb_length = (miscutil.distance_between(start_joint, end_joint) / 50)
     #pv_shape = shapeutil.create_poly_box(size = limb_length) # TODO: create a better shape for this by default
-    pv_grip = grip.Grip.create_grip(pv_locator, '{0}_{1}_pv'.format(side, region))
+    pv_grip = grip.Grip.create(pv_locator, name_root = '{0}_{1}_pv'.format(side, region))
     #miscutil.align_point_orient(pv_grip, pv_locator)
     #pm.makeIdentity(pv_grip, apply=True, t=1, r=1, s=0, n=0)
     # reference line

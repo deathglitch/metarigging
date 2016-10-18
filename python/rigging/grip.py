@@ -37,17 +37,21 @@ class Grip():
         grip = Grip(grip)
         '''
         grip = pm.joint( n= '{0}{1}'.format(name_prefix, name_root) )
-        pm.addAttr( grip, at='bool', ln='isGrip', dv=True)
+        pm.addAttr( grip, at='bool', ln='is_grip', dv=True)
         
         #add shape node
         if not shape:
             shape = fit_box_shape(driven_node, 2)
         
         shape = swap_shape_node(grip, shape)
+        miscutil.align_point_orient(grip, driven_node)
+        pm.makeIdentity(grip, apply = True, t = 0, r = 1, s = 0, n = 0)
         
         if zero_transform:
-            create_zero_transform(grip);
+            metautil.add_zero_transform(grip)
 
+        grip.radius.set(keyable = False, channelBox = False)
+        grip = Grip(grip)
         return grip
         
     @staticmethod
@@ -213,44 +217,6 @@ def swap_shape_node(node, new_shape):
     pm.delete(new_shape)
     return shape
     
-    
-def create_zero_transform(node):
-    '''Creates a parent transform and sets the input node's transforms to zero.
-    '''
-    zero_transform = pm.group(em=True, n='{0}_zero'.format(node.stripNamespace() ) )
-    metautil.align_point_orient(zero_transform, node)
-    
-    #set parent
-    node_parent = node.getParent()
-    if node_parent:
-        zero_transform.setParent(node_parent)
-    node.setParent(zero_transform)
-    if isinstance(node, pm.nodetypes.Joint):
-        node.jointOrient.set([0,0,0])
-    
-    #markup connectoins
-    node.addAttr('zeroTransform', at='message')
-    zero_transform.addAttr('zeroNode', dt='string')
-    zero_transform.zeroNode >> node.zeroTransform
-    
-    
-def has_zero_transform(node):
-    '''Checks for a connected zero_transform.
-    '''
-    result = False
-    if node.hasAttr('zeroTransform'):
-        if node.zeroTransform.listConnections():
-            result = True
-    
-    return result
-    
-def get_zero_transform(node):
-    '''Gets the zero_transform connected to the input node.
-    '''
-    result = None
-    if has_zero_transform(node):
-        result = node.zeroTransform.listConnections()
-    
-    return result
+
     
     

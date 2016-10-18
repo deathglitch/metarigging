@@ -74,7 +74,7 @@ class FKIKComponent(keyablecomponent.KeyableComponent):
         
         forward_axis = "-z" if side_prefix == 'l' else "z"
         #switch_shape = rigging.create_poly_shape_switch(size=3, forward_axis=forward_axis)
-        switch_grip = rigging.Grip.create_grip(switch_location, '{0}_{1}_fkik_switch'.format(side_prefix, region))
+        switch_grip = rigging.Grip.create(switch_location, '{0}_{1}_fkik_switch'.format(side_prefix, region))
         switch_attr_name = "fkik_switch"
         pm.addAttr(switch_grip, ln=switch_attr_name, k=True, at='double', min=0, max=1, dv=1)
         invert_node = miscutil.invert_attribute("{0}.{1}".format(switch_grip, switch_attr_name))
