@@ -1,7 +1,17 @@
 import pymel.core as pm
 import metautil
+import metautil.miscutil as miscutil
 
 class Grip():
+    
+    def __init__(self, node):
+        self.pynode = None
+        if not node or not pm.objExists(node):
+            raise pm.MayaNodeError("object given, {0}, doesn't exist".format(node))
+        node = pm.PyNode(node)
+        if not (node.hasAttr('is_grip') and isinstance(node, pm.nodetypes.Joint)):
+            raise pm.MayaNodeError("object given, {0}, isn't a grip".format(node))
+        self.pynode = node
     
     @staticmethod
     def create(driven_node, name_prefix='gr_', name_root=None, strip_prefix=0, shape=None, zero_transform=True):
@@ -13,6 +23,19 @@ class Grip():
         if name_root == None:
             name_root = driven_node.stripNamespace();
         pm.select(cl=True)
+        '''
+        node = pm.PyNode(node)
+        grip = pm.joint( n='gr_{0}'.format(name) )
+        add_box_shape(grip, 1)
+        miscutil.align_point_orient(grip, node)
+        pm.makeIdentity(grip, apply = True, t = 0, r = 1, s = 0, n = 0)
+        if add_zero:
+            metautil.add_zero_transform(grip)
+        pm.addAttr(grip, at='bool', ln='is_grip', dv=True)
+        #pm.addAttr('grip_layer', sn='grip_layer', dt='string')
+        grip.radius.set(keyable = False, channelBox = False)
+        grip = Grip(grip)
+        '''
         grip = pm.joint( n= '{0}{1}'.format(name_prefix, name_root) )
         pm.addAttr( grip, at='bool', ln='isGrip', dv=True)
         
@@ -24,16 +47,17 @@ class Grip():
         
         if zero_transform:
             create_zero_transform(grip);
-        
+
         return grip
         
     @staticmethod
     def create_grip_box(target):
-        box = pm.polyCube()[0]
-        #align box to target
+        box = add_box_shape_ratio(target, 1)
+        miscutil.align_point_orient(target, box)
         return box
         
     def lock_and_hide_attrs(self, attrs):
+        miscutil.lock_and_hide_attrs(self, attrs)
         return
         
     def get_grip_layer(self):
@@ -49,7 +73,7 @@ class Grip():
         return
         
     def get_zero_transform(self):
-        return
+        return self.zero_transform.listConnections()[0]
         
     def add_control_transform(self):
         return
@@ -62,6 +86,51 @@ class Grip():
         
     def mirror_grip_shape(self, flag = None):
         return
+        
+    def __getattr__(self, attrname):
+        return getattr(self.pynode, attrname)
+        
+    def __str__(self):
+        return self.pynode.__str__()
+     
+    def __melobject__(self):
+        return self.pynode.__melobject__()
+    
+    def __apimfn__(self):
+        return self.pynode.__apimfn__()
+        
+    def __repr__(self):
+        return self.pynode.__repr__()
+
+    def __radd__(self, other):
+        return self.pynode.__radd__(other)
+
+    def __reduce__(self):
+        return self.pynode.__reduce__()
+    
+    def __eq__(self, other):
+        return self.pynode.__eq__(other)
+       
+    def __ne__(self, other):
+        return self.pynode.__ne__(other)
+
+    def __nonzero__(self):
+        return self.pynode.__nonzero__()
+
+    def __lt__(self, other):
+        return self.pynode.__lt__(other)
+        
+    def __gt__(self, other):
+        return self.pynode.__gt__(other)
+        
+    def __le__(self, other):
+        return self.pynode.__le__(other)
+        
+    def __ge__(self, other):
+        return self.pynode.__ge__(other)
+        
+    def __hash__(self):
+        return self.pynode.__hash__()
         
 def add_box_shape(node, width):
     box = fit_box_shape(node, width)

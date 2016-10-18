@@ -19,18 +19,18 @@ class MetaAnimRig(metanode.MetaNode):
         
         #all_group
         all_group = pm.group(n=metaroot.object_type_value.get()+'_all', em=1)
-        meta_rig.connect_node_to_metanode(all_group, meta_rig, 'all_group')
+        meta_rig.connect_node_to_metanode(all_group, 'all_group')
         metautil.lock_visible_attrs(all_group)
         
         #controls
         ctrls = pm.group(n='ctrls', em=1)
-        meta_rig.connect_node_to_metanode(ctrls, meta_rig, 'ctrls')
+        meta_rig.connect_node_to_metanode(ctrls, 'ctrls')
         pm.parent(ctrls, all_group)
         metautil.lock_and_hide_attrs(ctrls, ['sx', 'sy', 'sz'])
         
         #do_not_touch
         dnt_group = pm.group(n='do_not_touch', em=1)
-        meta_rig.connect_node_to_metanode(dnt_group, meta_rig, 'do_not_touch')
+        meta_rig.connect_node_to_metanode(dnt_group, 'do_not_touch')
         pm.parent(dnt_group, all_group)
         metautil.lock_visible_attrs(dnt_group)
         
@@ -40,26 +40,24 @@ class MetaAnimRig(metanode.MetaNode):
         metautil.lock_visible_attrs(group_skins)
         
         root_joint = metaroot.root_joint.get()
-        pm.parent(root_joint, dnt_group)
-        
-        meta_rig.connect_node_to_metanode(pm.PyNode(meta_rig), metaroot, 'meta_children')
+        pm.parent(root_joint, all_group)
+        metaparent.connect_node_to_metanode(meta_rig, 'meta_children')
         
         #restore namespace
         #orig_ns.setCurrent()
         return meta_rig
     
     def get_metarig(self):
-        #return self.metaroot.listConnections(s=0, d=1, type='network')
-        return self.meta_rig
+        return self.metaroot.listConnections(s=0, d=1, type='network')
         
     def get_ctrls_group(self):
-        return self.ctrls
+        return self.ctrls.listConnections()[0]
         
     def get_do_not_touch_group(self):
-        return self.dnt_group
+        return self.do_not_touch.listConnections()[0]
         
     def get_all_group(self):
-        return self.all_group
+        return self.all_group.listConnections()[0]
         
     def get_grips(self):
 		all_grips = pm.ls(self.namespace()+'*.isGrip', objectsOnly=True)

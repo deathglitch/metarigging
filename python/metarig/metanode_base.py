@@ -22,7 +22,10 @@ class MetaNode(object):
     
     @staticmethod
     def create(name, type, parent = None, version = 1.0):
-        if parent:
+        if not parent:
+            print 'no parent for metanode:', name
+            #raise StandardError('MetaNode must have a parent!!')
+        else:
             parent = MetaNode(parent)
         node = pm.createNode('network', name=str(name))
         
@@ -32,17 +35,19 @@ class MetaNode(object):
         node.addAttr('meta_children', dt='string')
         
         node = MetaNode(node)
-        print 'parent:', parent
-        '''
-        if not version:
-            node.version.set(MetaNode.VERSION)
-        '''
         if parent:
-            #parent.meta_children >> node.meta_parent
             node.set_metanode_parent(parent)
             
         return node
-
+        
+    def get_xnode_parent(self):
+        result = None
+        if self.pynode.hasAttr("meta_parent"):
+            conn = self.pynode.meta_parent.listConnections()
+            if conn:
+                result = MetaNode(conn[0])
+        return result
+        
     def get_meta_children(self, of_type = None):
         '''
         of_type: class object, not a string
@@ -59,6 +64,9 @@ class MetaNode(object):
                     result = children
         return result
         
+    def get_type(self):
+        return self.meta_type.get()
+
     def get_metanode_parent(self):
         meta_parent = self.pynode.meta_parent.listConnections()
         return meta_parent[0]
@@ -68,15 +76,31 @@ class MetaNode(object):
         child_attr = self.meta_parent
         parent_attr >> child_attr
  
-    def connect_node_to_metanode(self, parent_node, metanode, connection):
-        self.add_meta_parent_attr_to_node(parent_node)
+    def connect_node_to_metanode(self, metanode, connection, parent_attr = 'meta_parent'):
+        self.add_meta_parent_attr_to_node(pm.PyNode(metanode))
         if not self.pynode.hasAttr(connection):
             self.pynode.addAttr(connection, dt='string')
-        metanode.attr(connection) >> parent_node.meta_parent
+        self.pynode.attr(connection) >> metanode.attr(parent_attr)
+        return
+
+    def connect_ordered_nodes_to_metanode(self, connect_nodes, attr, parent_attr = 'meta_parent'):
+        start_index = 0
+        if not self.pynode.hasAttr(attr):
+            self.pynode.addAttr(attr, dt='string', m=1)
+        else:
+            indices = self.pynode.getAttr(attr, mi=True)
+            if indices:
+                for index in indices:
+                    if index > start_index:
+                        start_index = index
+                start_index += 1
+        for index, connect_node in enumerate(connect_nodes):
+            if not connect_node.hasAttr(parent_attr):
+                connect_node.addAttr(parent_attr, dt='string')
+            self.pynode.attr('%s[%i]' % (attr, index + start_index)) >> connect_node.attr(parent_attr)
         return
         
     def add_meta_parent_attr_to_node(self, parent_node):
-        print 'parent_node', parent_node
         if not pm.hasAttr(parent_node, 'meta_parent'):
             pm.addAttr(parent_node, sn='meta_parent', dt='string')
         return

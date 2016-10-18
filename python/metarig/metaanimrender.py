@@ -23,7 +23,7 @@ class MetaAnimRender(metanode.MetaNode):
         group_skins.inheritsTransform.set(0)
         metarender.connect_node_to_metanode(group_skins, metarender, 'group_skins')
         
-        metarender.connect_node_to_metanode(pm.PyNode(metarender), meta_parent, 'meta_children')
+        metarender.connect_node_to_metanode(meta_parent, 'meta_children')
 
         return metarender
         
