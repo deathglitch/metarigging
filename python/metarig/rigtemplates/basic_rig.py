@@ -10,17 +10,23 @@ def create_basic_rig(source_file, ns = 'rig'):
     if render_path:
         metautil.import_into_namespace(render_path, ns)
     root_joint = metautil.find_bone(ns, 'center', 'root')
-    metaroot = metautil.get_metaroot_from_root_joint(root_joint)
+    meta_root = metautil.get_metaroot_from_root_joint(root_joint)
 
     #source_file_path = metaroot.source_file_path.get()
+    #source_file_path = meta_root.source_file_path.get()
     pm.namespace(set=ns)
-    rig_object = metarig.MetaAnimRig.create(metaroot)
-    print 'rig_object', rig_object
-    #rig = rig_object.get_metarig()
-    #control_group = rig.get_ctrls_group()
-    #do_not_touch_group = rig.get_do_not_touch_group()
+    meta_rig = metarig.MetaAnimRig.create(meta_root)
     
-    #rig_object.finalize()
+    control_group = meta_rig.get_ctrls_group()
+    do_not_touch_group = meta_rig.get_do_not_touch_group()
     
-    return rig_object
+    #comp = metarig.FKComponent.create(metanode_parent = meta_rig, start_joint = 'rig:b_anim', end_joint = 'rig:b_anim3', side = 'right', region = 'other')
+    #comp = metarig.IKComponent.create(metanode_parent = meta_rig, start_joint = 'rig:b_anim', end_joint = 'rig:b_anim3', side = 'center', region = 'other')
+    #comp = metarig.FKIKComponent.create(metanode_parent = meta_rig, start_joint = 'rig:b_anim', end_joint = 'rig:b_anim3', side = 'left', region = 'other')
+
+
+
+    #meta_rig.finalize()
+    pm.namespace(set=':')
+    return meta_rig
     
