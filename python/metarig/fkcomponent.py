@@ -58,34 +58,34 @@ class FKComponent(keyablecomponent.KeyableComponent):
         
         return fknode
         
- 	def get_grips(self):
-		grips = self.fk_grips.listConnections()
-		grips = map(lambda x: rigging.Grip(x), grips)
-		grips.reverse() #this makes the fk root grip control the last in the list
-		return grips
+    def get_grips(self):
+        grips = self.fk_grips.listConnections()
+        grips = map(lambda x: rigging.Grip(x), grips)
+        grips.reverse() #this makes the fk root grip control the last in the list
+        return grips
 
-	def get_start_grip(self):
-		grips = self.get_grips()
-		return grips[-1]
-		
-	def get_end_grip(self):
-		grips = self.get_grips()
-		return grips[0]
-	
-	def get_bind_joints(self):
-		return self.bind_joints.listConnections()
-	
-	def select_grips(self):
-		pm.select(self.get_grips())
-	
-	def key_grips(self):
-		grips = self.get_grips()
-		pm.setKeyframe(grips)
-		
-	def to_default_pose(self):
-		grips = self.get_grips()
-		for grip in grips:
-			miscutil.reset_attrs(grip)
+    def get_start_grip(self):
+        grips = self.get_grips()
+        return grips[-1]
+
+    def get_end_grip(self):
+        grips = self.get_grips()
+        return grips[0]
+
+    def get_bind_joints(self):
+        return self.bind_joints.listConnections()
+
+    def select_grips(self):
+        pm.select(self.get_grips())
+
+    def key_grips(self):
+        grips = self.get_grips()
+        pm.setKeyframe(grips)
+
+    def to_default_pose(self):
+        grips = self.get_grips()
+        for grip in grips:
+            miscutil.reset_attrs(grip)
             
     def attach_to_component(self, attach_component, location, point = True, orient = True):
         attach_component = component.Component(attach_component)
