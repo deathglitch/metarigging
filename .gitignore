@@ -54,3 +54,9 @@ docs/_build/
 
 # PyBuilder
 target/
+python/.idea/codeStyles/codeStyleConfig.xml
+python/.idea/maya_python.iml
+python/.idea/misc.xml
+python/.idea/modules.xml
+python/.idea/vcs.xml
+python/.idea/workspace.xml
