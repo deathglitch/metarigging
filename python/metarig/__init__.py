@@ -21,10 +21,10 @@ from gripmaterials import *
 
 #deleting classes, function, modules not in module
 for _function_name in [_member[0] for _member in inspect.getmembers(_module, inspect.isfunction) if not _member[1].__module__.startswith(__name__)]:
-    delatt(_module, _function_name)
+    delattr(_module, _function_name)
     
 for _class_name in [_member[0] for _member in inspect.getmembers(_module, inspect.isclass) if not _member[1].__module__.startswith(__name__)]:
-    delatt(_module, _class_name)
+    delattr(_module, _class_name)
     
 for _module_info in [_member for _member in inspect.getmembers(_module, inspect.ismodule) if _member[1].__name__ not in _safe_import_list]:
     if not hasattr(_module_info[1], "__file__"):
