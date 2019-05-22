@@ -1,7 +1,7 @@
-import pysideuic
+import pyside2uic
 import xml.etree.ElementTree as xml
 from cStringIO import StringIO
-from PySide import QtGui
+from PySide2 import QtWidgets
 
 def load_ui_type(ui_file):
     """
@@ -16,11 +16,11 @@ def load_ui_type(ui_file):
         o = StringIO()
         frame = {}
         
-        pysideuic.compileUi(f, o, indent=0)
+        pyside2uic.compileUi(f, o, indent=0)
         pyc = compile(o.getvalue(), '<string>', 'exec')
         exec pyc in frame
         
         #Fetch the base_class and form class based on their type in the xml from designer
         form_class = frame['Ui_%s'%form_class]
-        base_class = eval('QtGui.%s'%widget_class)
+        base_class = eval('QtWidgets.%s'%widget_class)
     return form_class, base_class

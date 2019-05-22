@@ -5,8 +5,9 @@ import metaui
 metaui.ListExample().show()
 """
 
-import PySide.QtCore as qtcore
-import PySide.QtGui as qtgui
+import PySide2.QtCore as qtcore
+import PySide2.QtGui as qtgui
+from PySide2 import QtWidgets
 import qtutils
 
 #If you put the .ui file for this example elsewhere, just change this path.
@@ -24,7 +25,7 @@ class ListExample(list_example_form, list_example_base):
         """
         Appends a new item to the end of the listWidget.
         """
-        item = qtgui.QListWidgetItem(self.listWidget)
+        item = QtWidgets.QListWidgetItem(self.listWidget)
         item.setText('Item #%s!'%self.listWidget.count())
 
     def remove_item(self):

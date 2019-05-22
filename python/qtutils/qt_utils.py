@@ -1,9 +1,10 @@
 #Source code for some common Maya/PyQt functions we will be using
-import shiboken
+import shiboken2
 #sip.setapi('QString', 2)
 #sip.setapi('QVariant', 2)
-import PySide.QtCore as qtcore
-import PySide.QtGui as qtgui
+import PySide2.QtCore as qtcore
+import PySide2.QtGui as qtgui
+from PySide2 import QtWidgets as qtwidgets
 import maya.OpenMayaUI as apiui
 
 def get_maya_window():
@@ -13,7 +14,7 @@ def get_maya_window():
 	"""
 	window = apiui.MQtUtil.mainWindow()
 	if window is not None:
-		return shiboken.wrapInstance(long(window), qtgui.QWidget)
+		return shiboken2.wrapInstance(long(window), qtwidgets.QWidget)
 
 def to_qt_object(maya_name):
 	"""
@@ -27,7 +28,7 @@ def to_qt_object(maya_name):
 	if control is None:
 		control = apiui.MQtUtil.findMenuItem(maya_name)
 	if control is not None:
-		return shiboken.wrapInstance(long(control), qtgui.QWidget)
+		return shiboken2.wrapInstance(long(control), qtwidgets.QWidget)
 
 
 
