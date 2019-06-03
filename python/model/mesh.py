@@ -111,7 +111,8 @@ class Mesh(object):
 			pm.delete(target)
 
 			opposite_str = str(opposite_pose)
-			opposite_pose.delete()
+			if pm.objExists(opposite_pose):
+				opposite_pose.delete()
 			opposite_pose = Mesh(pm.rename(invShape, opposite_str), skip_dialog)
 
 			return opposite_pose
