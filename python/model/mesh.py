@@ -9,7 +9,7 @@ import maya.cmds as cmds
 import os
 
 #Bungie python imports
-import rigging.blendnode
+import model.blendnode.BlendShapeNode
 
 class Mesh(object):
 	'''This is a mesh that is a blendshape.  Does not need to be connected to the rig.'''
@@ -41,7 +41,7 @@ class Mesh(object):
 		blendnodes = self.mesh.getShape().listConnections(type=pm.nt.BlendShape)
 		if blendnodes:
 			for node in blendnodes:
-				rigging.blendnode.BlendShapeNode(node).delete()
+				model.blendnode.BlendShapeNode(node).delete()
 		pm.delete(self.mesh)
 
 	def duplicate_mesh(self, mesh_name, remove_attrs = None, skip_dialog=False):
