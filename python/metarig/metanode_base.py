@@ -6,8 +6,10 @@ class MetaNode(object):
         result = None
         if node:
             node = pm.PyNode(node)
-            class_string = node.meta_type.get()
-            #print 'class_string: {0}'.format('metarig.'+class_string)
+            if node.hasAttr('meta_type'):
+                class_string = node.meta_type.get()
+            else:
+                raise TypeError('Node "{0}" is not a MetaMode.  It does not contain meta_type.'.format(node))
             eval_class = eval('metarig.'+class_string)
             result = eval_class.__new__(eval_class)
         else:

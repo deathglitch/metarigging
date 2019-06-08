@@ -42,7 +42,9 @@ class ParameterMetaNode(metanode_base.MetaBase):
 		ParameterMetaNode(node, parameter_list).update()
 		orig_ns.setCurrent()
 		return ParameterMetaNode(node, parameter_list)
-		
+
+	def get_parameter_block(self):
+		pass
 
 def get_parameters(path, file_name):
 	parameters = metautil.json_util.read_json(path, file_name)
