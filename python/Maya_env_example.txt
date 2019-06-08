@@ -1,0 +1,5 @@
+META_RIG_PATH = C:\Users\natha\Documents\metarigging\python
+MAYA_PYTHON = C:\Users\natha\Documents\maya_python
+PYTHONPATH = %META_RIG_PATH%;%MAYA_PYTHON%
+MAYA_SCRIPT_PATH = %META_RIG_PATH%;%MAYA_PYTHON%
+XBMLANGPATH = %META_RIG_PATH%\maya\icons;%MAYA_PYTHON%\maya\icons
