@@ -1,10 +1,10 @@
-''' Face: Staging UI. '''
+''' Blendshape wrapper '''
 
 # python imports
 # maya imports
 import pymel.core as pm
 # meta imports
-import metautil.listutil
+import metautil.list_util
 
 
 
@@ -86,7 +86,7 @@ class BlendShapeNode():
 		if type(blendnode) == pm.nt.BlendShape:
 			return blendnode
 		elif blendnode and pm.ls(blendnode, type=(pm.nt.Mesh, pm.nt.Transform)):
-			blendnode = metautil.listutil.first_in_list(blendnode.getShape().listConnections(type=pm.nt.BlendShape))
+			blendnode = metautil.list_util.first_in_list(blendnode.getShape().listConnections(type=pm.nt.BlendShape))
 
 		if blendnode:
 			return blendnode
