@@ -1,0 +1,1470 @@
+{
+    "brows": {
+        "left_brow_squeeze": {
+            "connection": "left_brow_squeeze", 
+            "frame": 168, 
+            "mirror_parameter": "right_brow_squeeze", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "left"
+        }, 
+        "left_inner_brow_down": {
+            "connection": "left_inner_brow_down", 
+            "frame": 149, 
+            "mirror_parameter": "right_inner_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_inner_brow_up", 
+            "side": "left"
+        }, 
+        "left_inner_brow_tilt_anger": {
+            "connection": "left_inner_brow_tilt_anger", 
+            "frame": 165, 
+            "mirror_parameter": "right_inner_brow_tilt_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_inner_brow_tilt_sad", 
+            "side": "left"
+        }, 
+        "left_inner_brow_tilt_sad": {
+            "connection": "left_inner_brow_tilt_sad", 
+            "frame": 161, 
+            "mirror_parameter": "right_inner_brow_tilt_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_inner_brow_tilt_anger", 
+            "side": "left"
+        }, 
+        "left_inner_brow_up": {
+            "connection": "left_inner_brow_up", 
+            "frame": 153, 
+            "mirror_parameter": "right_inner_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_inner_brow_down", 
+            "side": "left"
+        }, 
+        "left_middle_brow_down": {
+            "connection": "left_middle_brow_down", 
+            "frame": 157, 
+            "mirror_parameter": "right_middle_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_middle_brow_up", 
+            "side": "left"
+        }, 
+        "left_middle_brow_up": {
+            "connection": "left_middle_brow_up", 
+            "frame": 158, 
+            "mirror_parameter": "right_middle_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_middle_brow_down", 
+            "side": "left"
+        }, 
+        "left_outer_brow_down": {
+            "connection": "left_outer_brow_down", 
+            "frame": 150, 
+            "mirror_parameter": "right_outer_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_outer_brow_up", 
+            "side": "left"
+        }, 
+        "left_outer_brow_tilt_anger": {
+            "connection": "left_outer_brow_tilt_anger", 
+            "frame": 166, 
+            "mirror_parameter": "right_outer_brow_tilt_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_outer_brow_tilt_sad", 
+            "side": "left"
+        }, 
+        "left_outer_brow_tilt_sad": {
+            "connection": "left_outer_brow_tilt_sad", 
+            "frame": 162, 
+            "mirror_parameter": "right_outer_brow_tilt_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_outer_brow_tilt_anger", 
+            "side": "left"
+        }, 
+        "left_outer_brow_up": {
+            "connection": "left_outer_brow_up", 
+            "frame": 154, 
+            "mirror_parameter": "right_outer_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_outer_brow_down", 
+            "side": "left"
+        }, 
+        "right_brow_squeeze": {
+            "connection": "right_brow_squeeze", 
+            "frame": 167, 
+            "mirror_parameter": "left_brow_squeeze", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "right"
+        }, 
+        "right_inner_brow_down": {
+            "connection": "right_inner_brow_down", 
+            "frame": 148, 
+            "mirror_parameter": "left_inner_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_inner_brow_up", 
+            "side": "right"
+        }, 
+        "right_inner_brow_tilt_anger": {
+            "connection": "right_inner_brow_tilt_anger", 
+            "frame": 164, 
+            "mirror_parameter": "left_inner_brow_tilt_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_inner_brow_tilt_sad", 
+            "side": "right"
+        }, 
+        "right_inner_brow_tilt_sad": {
+            "connection": "right_inner_brow_tilt_sad", 
+            "frame": 160, 
+            "mirror_parameter": "left_inner_brow_tilt_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_inner_brow_tilt_anger", 
+            "side": "right"
+        }, 
+        "right_inner_brow_up": {
+            "connection": "right_inner_brow_up", 
+            "frame": 152, 
+            "mirror_parameter": "left_inner_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_inner_brow_down", 
+            "side": "right"
+        }, 
+        "right_middle_brow_down": {
+            "connection": "right_middle_brow_down", 
+            "frame": 155, 
+            "mirror_parameter": "left_middle_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_middle_brow_up", 
+            "side": "right"
+        }, 
+        "right_middle_brow_up": {
+            "connection": "right_middle_brow_up", 
+            "frame": 156, 
+            "mirror_parameter": "left_middle_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_middle_brow_down", 
+            "side": "right"
+        }, 
+        "right_outer_brow_down": {
+            "connection": "right_outer_brow_down", 
+            "frame": 147, 
+            "mirror_parameter": "left_outer_brow_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_outer_brow_up", 
+            "side": "right"
+        }, 
+        "right_outer_brow_tilt_anger": {
+            "connection": "right_outer_brow_tilt_anger", 
+            "frame": 163, 
+            "mirror_parameter": "left_outer_brow_tilt_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_outer_brow_tilt_sad", 
+            "side": "right"
+        }, 
+        "right_outer_brow_tilt_sad": {
+            "connection": "right_outer_brow_tilt_sad", 
+            "frame": 159, 
+            "mirror_parameter": "left_outer_brow_tilt_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_outer_brow_tilt_anger", 
+            "side": "right"
+        }, 
+        "right_outer_brow_up": {
+            "connection": "right_outer_brow_up", 
+            "frame": 151, 
+            "mirror_parameter": "left_outer_brow_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_outer_brow_down", 
+            "side": "right"
+        }
+    }, 
+    "cheeks": {
+        "left_blow": {
+            "connection": "left_blow", 
+            "frame": 109, 
+            "mirror_parameter": "right_blow", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_suck", 
+            "side": "left"
+        }, 
+        "left_cheek_inner_down": {
+            "connection": "left_cheek_inner_down", 
+            "frame": 120, 
+            "mirror_parameter": "right_cheek_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_cheek_inner_up", 
+            "side": "left"
+        }, 
+        "left_cheek_inner_up": {
+            "connection": "left_cheek_inner_up", 
+            "frame": 117, 
+            "mirror_parameter": "right_cheek_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_cheek_down", 
+            "side": "left"
+        }, 
+        "left_cheek_outer_down": {
+            "connection": "left_cheek_outer_down", 
+            "frame": 121, 
+            "mirror_parameter": "right_cheek_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_cheek_outer_up", 
+            "side": "left"
+        }, 
+        "left_cheek_outer_up": {
+            "connection": "left_cheek_outer_up", 
+            "frame": 116, 
+            "mirror_parameter": "right_cheek_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_cheek_outer_down", 
+            "side": "left"
+        }, 
+        "left_nasolabial_out": {
+            "connection": "left_nasolabial_out", 
+            "frame": 113, 
+            "mirror_parameter": "right_nasolabial_out", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "left"
+        }, 
+        "left_suck": {
+            "connection": "left_suck", 
+            "frame": 111, 
+            "mirror_parameter": "right_suck", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_blow", 
+            "side": "left"
+        }, 
+        "right_blow": {
+            "connection": "right_blow", 
+            "frame": 108, 
+            "mirror_parameter": "left_blow", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_suck", 
+            "side": "right"
+        }, 
+        "right_cheek_inner_down": {
+            "connection": "right_cheek_inner_down", 
+            "frame": 118, 
+            "mirror_parameter": "left_cheek_inner_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_cheek_inner_up", 
+            "side": "right"
+        }, 
+        "right_cheek_inner_up": {
+            "connection": "right_cheek_inner_up", 
+            "frame": 115, 
+            "mirror_parameter": "left_cheek_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_cheek_inner_down", 
+            "side": "right"
+        }, 
+        "right_cheek_outer_down": {
+            "connection": "right_cheek_outer_down", 
+            "frame": 119, 
+            "mirror_parameter": "left_cheek_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_cheek_outer_up", 
+            "side": "right"
+        }, 
+        "right_cheek_outer_up": {
+            "connection": "right_cheek_outer_up", 
+            "frame": 114, 
+            "mirror_parameter": "left_cheek_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_cheek_outer_down", 
+            "side": "right"
+        }, 
+        "right_nasolabial_out": {
+            "connection": "right_nasolabial_out", 
+            "frame": 112, 
+            "mirror_parameter": "left_nasolabial_out", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "right"
+        }, 
+        "right_suck": {
+            "connection": "right_suck", 
+            "frame": 110, 
+            "mirror_parameter": "left_suck", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_blow", 
+            "side": "right"
+        }
+    }, 
+    "custom_parameter": {
+        "custom_parameter_01": {
+            "connection": "custom_parameter_01", 
+            "frame": 188, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_02": {
+            "connection": "custom_parameter_02", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_03": {
+            "connection": "custom_parameter_03", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_04": {
+            "connection": "custom_parameter_04", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_05": {
+            "connection": "custom_parameter_05", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_06": {
+            "connection": "custom_parameter_06", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_07": {
+            "connection": "custom_parameter_07", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_08": {
+            "connection": "custom_parameter_08", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_09": {
+            "connection": "custom_parameter_09", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "custom_parameter_10": {
+            "connection": "custom_parameter_10", 
+            "frame": 171, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }
+    }, 
+    "eyelids": {
+        "left_lower_eyelid_down": {
+            "connection": "left_lower_eyelid_down", 
+            "frame": 173, 
+            "mirror_parameter": "right_lower_eyelid_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_eyelid_up", 
+            "side": "left"
+        }, 
+        "left_lower_eyelid_twist_anger": {
+            "connection": "left_lower_eyelid_twist_anger", 
+            "frame": 185, 
+            "mirror_parameter": "right_lower_eyelid_twist_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_eyelid_twist_sad", 
+            "side": "left"
+        }, 
+        "left_lower_eyelid_twist_sad": {
+            "connection": "left_lower_eyelid_twist_sad", 
+            "frame": 183, 
+            "mirror_parameter": "right_lower_eyelid_twist_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_eyelid_twist_anger", 
+            "side": "left"
+        }, 
+        "left_lower_eyelid_up": {
+            "connection": "left_lower_eyelid_up", 
+            "frame": 177, 
+            "mirror_parameter": "right_lower_eyelid_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_eyelid_down", 
+            "side": "left"
+        }, 
+        "left_upper_eyelid_down": {
+            "connection": "left_upper_eyelid_down", 
+            "frame": 171, 
+            "mirror_parameter": "right_upper_eyelid_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_eyelid_up", 
+            "side": "left"
+        }, 
+        "left_upper_eyelid_twist_anger": {
+            "connection": "left_upper_eyelid_twist_anger", 
+            "frame": 181, 
+            "mirror_parameter": "right_upper_eyelid_twist_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_eyelid_twist_sad", 
+            "side": "left"
+        }, 
+        "left_upper_eyelid_twist_sad": {
+            "connection": "left_upper_eyelid_twist_sad", 
+            "frame": 179, 
+            "mirror_parameter": "right_upper_eyelid_twist_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_eyelid_twist_anger", 
+            "side": "left"
+        }, 
+        "left_upper_eyelid_up": {
+            "connection": "left_upper_eyelid_up", 
+            "frame": 175, 
+            "mirror_parameter": "right_upper_eyelid_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_eyelid_down", 
+            "side": "left"
+        }, 
+        "right_lower_eyelid_down": {
+            "connection": "right_lower_eyelid_down", 
+            "frame": 172, 
+            "mirror_parameter": "left_lower_eyelid_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_eyelid_up", 
+            "side": "right"
+        }, 
+        "right_lower_eyelid_twist_anger": {
+            "connection": "right_lower_eyelid_twist_anger", 
+            "frame": 184, 
+            "mirror_parameter": "left_lower_eyelid_twist_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_eyelid_twist_sad", 
+            "side": "right"
+        }, 
+        "right_lower_eyelid_twist_sad": {
+            "connection": "right_lower_eyelid_twist_sad", 
+            "frame": 182, 
+            "mirror_parameter": "left_lower_eyelid_twist_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_eyelid_twist_anger", 
+            "side": "right"
+        }, 
+        "right_lower_eyelid_up": {
+            "connection": "right_lower_eyelid_up", 
+            "frame": 176, 
+            "mirror_parameter": "left_lower_eyelid_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_eyelid_down", 
+            "side": "right"
+        }, 
+        "right_upper_eyelid_down": {
+            "connection": "right_upper_eyelid_down", 
+            "frame": 170, 
+            "mirror_parameter": "left_upper_eyelid_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_eyelid_up", 
+            "side": "right"
+        }, 
+        "right_upper_eyelid_twist_anger": {
+            "connection": "right_upper_eyelid_twist_anger", 
+            "frame": 180, 
+            "mirror_parameter": "left_upper_eyelid_twist_anger", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_eyelid_twist_sad", 
+            "side": "right"
+        }, 
+        "right_upper_eyelid_twist_sad": {
+            "connection": "right_upper_eyelid_twist_sad", 
+            "frame": 178, 
+            "mirror_parameter": "left_upper_eyelid_twist_sad", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_eyelid_twist_anger", 
+            "side": "right"
+        }, 
+        "right_upper_eyelid_up": {
+            "connection": "right_upper_eyelid_up", 
+            "frame": 174, 
+            "mirror_parameter": "left_upper_eyelid_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_eyelid_down", 
+            "side": "right"
+        }
+    }, 
+    "eyes": {
+        "left_eye_down": {
+            "connection": "left_eye_down", 
+            "frame": 145, 
+            "mirror_parameter": "right_eye_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_eye_up", 
+            "side": "left"
+        }, 
+        "left_eye_left": {
+            "connection": "left_eye_left", 
+            "frame": 141, 
+            "mirror_parameter": "right_eye_right", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_eye_right", 
+            "side": "left"
+        }, 
+        "left_eye_right": {
+            "connection": "left_eye_right", 
+            "frame": 139, 
+            "mirror_parameter": "right_eye_left", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_eye_left", 
+            "side": "left"
+        }, 
+        "left_eye_up": {
+            "connection": "left_eye_up", 
+            "frame": 143, 
+            "mirror_parameter": "right_eye_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_eye_down", 
+            "side": "left"
+        }, 
+        "right_eye_down": {
+            "connection": "right_eye_down", 
+            "frame": 144, 
+            "mirror_parameter": "left_eye_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_eye_up", 
+            "side": "right"
+        }, 
+        "right_eye_left": {
+            "connection": "right_eye_left", 
+            "frame": 140, 
+            "mirror_parameter": "left_eye_right", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_eye_right", 
+            "side": "right"
+        }, 
+        "right_eye_right": {
+            "connection": "right_eye_right", 
+            "frame": 138, 
+            "mirror_parameter": "left_eye_left", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_eye_left", 
+            "side": "right"
+        }, 
+        "right_eye_up": {
+            "connection": "right_eye_up", 
+            "frame": 142, 
+            "mirror_parameter": "left_eye_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_eye_down", 
+            "side": "right"
+        }
+    }, 
+    "jaw": {
+        "chin_down": {
+            "connection": "chin_down", 
+            "frame": 50, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "chin_up", 
+            "side": "center"
+        }, 
+        "chin_up": {
+            "connection": "chin_up", 
+            "frame": 49, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "chin_down", 
+            "side": "center"
+        }, 
+        "jaw_back": {
+            "connection": "jaw_back", 
+            "frame": 46, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_forward", 
+            "side": "center"
+        }, 
+        "jaw_clench": {
+            "connection": "jaw_clench", 
+            "frame": 40, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_open", 
+            "side": "center"
+        }, 
+        "jaw_down": {
+            "connection": "jaw_down", 
+            "frame": 41, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_up", 
+            "side": "center"
+        }, 
+        "jaw_forward": {
+            "connection": "jaw_forward", 
+            "frame": 45, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_back", 
+            "side": "center"
+        }, 
+        "jaw_open": {
+            "connection": "jaw_open", 
+            "frame": 39, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_clench", 
+            "side": "center"
+        }, 
+        "jaw_squash": {
+            "connection": "jaw_squash", 
+            "frame": 36, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_stretch", 
+            "side": "center"
+        }, 
+        "jaw_stretch": {
+            "connection": "jaw_stretch", 
+            "frame": 35, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_squash", 
+            "side": "center"
+        }, 
+        "jaw_up": {
+            "connection": "jaw_up", 
+            "frame": 42, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "jaw_down", 
+            "side": "center"
+        }, 
+        "left_jaw": {
+            "connection": "left_jaw", 
+            "frame": 47, 
+            "mirror_parameter": "right_jaw", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "left_jaw_squash_tilt": {
+            "connection": "left_jaw_squash_tilt", 
+            "frame": 37, 
+            "mirror_parameter": "right_jaw_squash_tilt", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "left_jaw_tilt": {
+            "connection": "left_jaw_tilt", 
+            "frame": 44, 
+            "mirror_parameter": "right_jaw_tilt", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "right_jaw": {
+            "connection": "right_jaw", 
+            "frame": 48, 
+            "mirror_parameter": "left_jaw", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "right_jaw_squash_tilt": {
+            "connection": "right_jaw_squash_tilt", 
+            "frame": 38, 
+            "mirror_parameter": "left_jaw_squash_tilt", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "right_jaw_tilt": {
+            "connection": "right_jaw_tilt", 
+            "frame": 43, 
+            "mirror_parameter": "left_jaw_tilt", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }
+    }, 
+    "mouth": {
+        "center_lower_lip_down": {
+            "connection": "center_lower_lip_down", 
+            "frame": 74, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "center_lower_lip_up", 
+            "side": "center"
+        }, 
+        "center_lower_lip_up": {
+            "connection": "center_lower_lip_up", 
+            "frame": 79, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "center_lower_lip_down", 
+            "side": "center"
+        }, 
+        "center_upper_lip_down": {
+            "connection": "center_upper_lip_down", 
+            "frame": 69, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "center_upper_lip_up", 
+            "side": "center"
+        }, 
+        "center_upper_lip_up": {
+            "connection": "center_upper_lip_up", 
+            "frame": 64, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "center_upper_lip_down", 
+            "side": "center"
+        }, 
+        "left_lips": {
+            "connection": "left_lips", 
+            "frame": 97, 
+            "mirror_parameter": "right_lips", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lips", 
+            "side": "left"
+        }, 
+        "left_lower_corner_adjust_down": {
+            "connection": "left_lower_corner_adjust_down", 
+            "frame": 88, 
+            "mirror_parameter": "right_lower_corner_adjust_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_corner_adjust_up", 
+            "side": "left"
+        }, 
+        "left_lower_corner_adjust_up": {
+            "connection": "left_lower_corner_adjust_up", 
+            "frame": 90, 
+            "mirror_parameter": "right_lower_corner_adjust_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_corner_adjust_down", 
+            "side": "left"
+        }, 
+        "left_lower_lip_inner_down": {
+            "connection": "left_lower_lip_inner_down", 
+            "frame": 75, 
+            "mirror_parameter": "right_lower_lip_inner_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_lip_inner_up", 
+            "side": "left"
+        }, 
+        "left_lower_lip_inner_up": {
+            "connection": "left_lower_lip_inner_up", 
+            "frame": 80, 
+            "mirror_parameter": "right_lower_lip_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_lip_inner_down", 
+            "side": "left"
+        }, 
+        "left_lower_lip_outer_down": {
+            "connection": "left_lower_lip_outer_down", 
+            "frame": 77, 
+            "mirror_parameter": "right_lower_lip_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_lip_outer_up", 
+            "side": "left"
+        }, 
+        "left_lower_lip_outer_up": {
+            "connection": "left_lower_lip_outer_up", 
+            "frame": 82, 
+            "mirror_parameter": "right_lower_lip_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lower_lip_outer_down", 
+            "side": "left"
+        }, 
+        "left_mouth_down": {
+            "connection": "left_mouth_down", 
+            "frame": 62, 
+            "mirror_parameter": "right_mouth_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_mouth_up", 
+            "side": "left"
+        }, 
+        "left_mouth_oo": {
+            "connection": "left_mouth_oo", 
+            "frame": 58, 
+            "mirror_parameter": "right_mouth_oo", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_mouth_stretch", 
+            "side": "left"
+        }, 
+        "left_mouth_stretch": {
+            "connection": "left_mouth_stretch", 
+            "frame": 56, 
+            "mirror_parameter": "right_mouth_stretch", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_mouth_oo", 
+            "side": "left"
+        }, 
+        "left_mouth_up": {
+            "connection": "left_mouth_up", 
+            "frame": 60, 
+            "mirror_parameter": "right_mouth_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_mouth_down", 
+            "side": "left"
+        }, 
+        "left_pucker": {
+            "connection": "left_pucker", 
+            "frame": 104, 
+            "mirror_parameter": "right_pucker", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "left"
+        }, 
+        "left_upper_corner_adjust_down": {
+            "connection": "left_upper_corner_adjust_down", 
+            "frame": 86, 
+            "mirror_parameter": "right_upper_corner_adjust_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_corner_adjust_up", 
+            "side": "left"
+        }, 
+        "left_upper_corner_adjust_up": {
+            "connection": "left_upper_corner_adjust_up", 
+            "frame": 84, 
+            "mirror_parameter": "right_upper_corner_adjust_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_corner_adjust_down", 
+            "side": "left"
+        }, 
+        "left_upper_lip_inner_down": {
+            "connection": "left_upper_lip_inner_down", 
+            "frame": 72, 
+            "mirror_parameter": "right_upper_lip_inner_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_lip_inner_up", 
+            "side": "left"
+        }, 
+        "left_upper_lip_inner_up": {
+            "connection": "left_upper_lip_inner_up", 
+            "frame": 67, 
+            "mirror_parameter": "right_upper_lip_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_lip_inner_down", 
+            "side": "left"
+        }, 
+        "left_upper_lip_outer_down": {
+            "connection": "left_upper_lip_outer_down", 
+            "frame": 70, 
+            "mirror_parameter": "right_upper_lip_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_lip_outer_up", 
+            "side": "left"
+        }, 
+        "left_upper_lip_outer_up": {
+            "connection": "left_upper_lip_outer_up", 
+            "frame": 65, 
+            "mirror_parameter": "right_upper_lip_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_upper_lip_outer_down", 
+            "side": "left"
+        }, 
+        "lips_down": {
+            "connection": "lips_down", 
+            "frame": 92, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lips_up", 
+            "side": "center"
+        }, 
+        "lips_up": {
+            "connection": "lips_up", 
+            "frame": 91, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lips_down", 
+            "side": "center"
+        }, 
+        "lower_lip_back": {
+            "connection": "lower_lip_back", 
+            "frame": 96, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lower_lip_forward", 
+            "side": "center"
+        }, 
+        "lower_lip_curl": {
+            "connection": "lower_lip_curl", 
+            "frame": 102, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lower_lip_funnel", 
+            "side": "center"
+        }, 
+        "lower_lip_forward": {
+            "connection": "lower_lip_forward", 
+            "frame": 94, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lower_lip_back", 
+            "side": "center"
+        }, 
+        "lower_lip_funnel": {
+            "connection": "lower_lip_funnel", 
+            "frame": 100, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "lower_lip_curl", 
+            "side": "center"
+        }, 
+        "right_lips": {
+            "connection": "right_lips", 
+            "frame": 98, 
+            "mirror_parameter": "left_lips", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_lips", 
+            "side": "right"
+        }, 
+        "right_lower_corner_adjust_down": {
+            "connection": "right_lower_corner_adjust_down", 
+            "frame": 87, 
+            "mirror_parameter": "left_lower_corner_adjust_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_corner_adjust_up", 
+            "side": "right"
+        }, 
+        "right_lower_corner_adjust_up": {
+            "connection": "right_lower_corner_adjust_up", 
+            "frame": 89, 
+            "mirror_parameter": "left_lower_corner_adjust_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_corner_adjust_down", 
+            "side": "right"
+        }, 
+        "right_lower_lip_inner_down": {
+            "connection": "right_lower_lip_inner_down", 
+            "frame": 73, 
+            "mirror_parameter": "left_lower_lip_inner_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_lip_inner_up", 
+            "side": "right"
+        }, 
+        "right_lower_lip_inner_up": {
+            "connection": "right_lower_lip_inner_up", 
+            "frame": 78, 
+            "mirror_parameter": "left_lower_lip_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_lip_inner_down", 
+            "side": "right"
+        }, 
+        "right_lower_lip_outer_down": {
+            "connection": "right_lower_lip_outer_down", 
+            "frame": 76, 
+            "mirror_parameter": "left_lower_lip_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_lip_outer_up", 
+            "side": "right"
+        }, 
+        "right_lower_lip_outer_up": {
+            "connection": "right_lower_lip_outer_up", 
+            "frame": 81, 
+            "mirror_parameter": "left_lower_lip_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_lower_lip_outer_down", 
+            "side": "right"
+        }, 
+        "right_mouth_down": {
+            "connection": "right_mouth_down", 
+            "frame": 61, 
+            "mirror_parameter": "left_mouth_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_mouth_up", 
+            "side": "right"
+        }, 
+        "right_mouth_oo": {
+            "connection": "right_mouth_oo", 
+            "frame": 57, 
+            "mirror_parameter": "left_mouth_oo", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_mouth_stretch", 
+            "side": "right"
+        }, 
+        "right_mouth_stretch": {
+            "connection": "right_mouth_stretch", 
+            "frame": 55, 
+            "mirror_parameter": "left_mouth_stretch", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_mouth_oo", 
+            "side": "right"
+        }, 
+        "right_mouth_up": {
+            "connection": "right_mouth_up", 
+            "frame": 59, 
+            "mirror_parameter": "left_mouth_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_mouth_down", 
+            "side": "right"
+        }, 
+        "right_pucker": {
+            "connection": "right_pucker", 
+            "frame": 103, 
+            "mirror_parameter": "left_pucker", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "right"
+        }, 
+        "right_upper_corner_adjust_down": {
+            "connection": "right_upper_corner_adjust_down", 
+            "frame": 85, 
+            "mirror_parameter": "left_upper_corner_adjust_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_corner_adjust_up", 
+            "side": "right"
+        }, 
+        "right_upper_corner_adjust_up": {
+            "connection": "right_upper_corner_adjust_up", 
+            "frame": 83, 
+            "mirror_parameter": "left_upper_corner_adjust_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_corner_adjust_down", 
+            "side": "right"
+        }, 
+        "right_upper_lip_inner_down": {
+            "connection": "right_upper_lip_inner_down", 
+            "frame": 71, 
+            "mirror_parameter": "left_upper_lip_inner_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_lip_inner_up", 
+            "side": "right"
+        }, 
+        "right_upper_lip_inner_up": {
+            "connection": "right_upper_lip_inner_up", 
+            "frame": 66, 
+            "mirror_parameter": "left_upper_lip_inner_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_lip_inner_down", 
+            "side": "right"
+        }, 
+        "right_upper_lip_outer_down": {
+            "connection": "right_upper_lip_outer_down", 
+            "frame": 68, 
+            "mirror_parameter": "left_upper_lip_outer_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_lip_outer_up", 
+            "side": "right"
+        }, 
+        "right_upper_lip_outer_up": {
+            "connection": "right_upper_lip_outer_up", 
+            "frame": 63, 
+            "mirror_parameter": "left_upper_lip_outer_up", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_upper_lip_outer_down", 
+            "side": "right"
+        }, 
+        "upper_lip_back": {
+            "connection": "upper_lip_back", 
+            "frame": 95, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "upper_lip_forward", 
+            "side": "center"
+        }, 
+        "upper_lip_curl": {
+            "connection": "upper_lip_curl", 
+            "frame": 101, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "upper_lip_funnel", 
+            "side": "center"
+        }, 
+        "upper_lip_forward": {
+            "connection": "upper_lip_forward", 
+            "frame": 93, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "upper_lip_back", 
+            "side": "center"
+        }, 
+        "upper_lip_funnel": {
+            "connection": "upper_lip_funnel", 
+            "frame": 99, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "upper_lip_curl", 
+            "side": "center"
+        }
+    }, 
+    "nose": {
+        "left_nose_down": {
+            "connection": "left_nose_down", 
+            "frame": 136, 
+            "mirror_parameter": "right_nose_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_nose_sneer", 
+            "side": "left"
+        }, 
+        "left_nose_flare": {
+            "connection": "left_nose_flare", 
+            "frame": 130, 
+            "mirror_parameter": "right_nose_flare", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_nose_suck", 
+            "side": "left"
+        }, 
+        "left_nose_sneer": {
+            "connection": "left_nose_sneer", 
+            "frame": 132, 
+            "mirror_parameter": "right_nose_sneer", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_nose_down", 
+            "side": "left"
+        }, 
+        "left_nose_suck": {
+            "connection": "left_nose_suck", 
+            "frame": 134, 
+            "mirror_parameter": "right_nose_suck", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "left_nose_flare", 
+            "side": "left"
+        }, 
+        "nose_tip_down": {
+            "connection": "nose_tip_down", 
+            "frame": 126, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "nose_tip_up", 
+            "side": "center"
+        }, 
+        "nose_tip_left": {
+            "connection": "nose_tip_left", 
+            "frame": 128, 
+            "mirror_parameter": "nose_tip_right", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "nose_tip_right", 
+            "side": "center"
+        }, 
+        "nose_tip_right": {
+            "connection": "nose_tip_right", 
+            "frame": 127, 
+            "mirror_parameter": "nose_tip_left", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "nose_tip_left", 
+            "side": "center"
+        }, 
+        "nose_tip_up": {
+            "connection": "nose_tip_up", 
+            "frame": 125, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "nose_tip_down", 
+            "side": "center"
+        }, 
+        "right_nose_down": {
+            "connection": "right_nose_down", 
+            "frame": 135, 
+            "mirror_parameter": "left_nose_down", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_nose_sneer", 
+            "side": "right"
+        }, 
+        "right_nose_flare": {
+            "connection": "right_nose_flare", 
+            "frame": 129, 
+            "mirror_parameter": "left_nose_flare", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_nose_suck", 
+            "side": "right"
+        }, 
+        "right_nose_sneer": {
+            "connection": "right_nose_sneer", 
+            "frame": 131, 
+            "mirror_parameter": "left_nose_sneer", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_nose_down", 
+            "side": "right"
+        }, 
+        "right_nose_suck": {
+            "connection": "right_nose_suck", 
+            "frame": 133, 
+            "mirror_parameter": "left_nose_suck", 
+            "multiplier": 1.0, 
+            "opposite_parameter": "right_nose_flare", 
+            "side": "right"
+        }
+    }, 
+    "phonemes": {
+        "ah": {
+            "connection": "ah", 
+            "frame": 17, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "ao": {
+            "connection": "ao", 
+            "frame": 18, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "ee": {
+            "connection": "ee", 
+            "frame": 14, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "eh": {
+            "connection": "eh", 
+            "frame": 16, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "ei": {
+            "connection": "ei", 
+            "frame": 15, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "er": {
+            "connection": "er", 
+            "frame": 10, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "flap": {
+            "connection": "flap", 
+            "frame": 4, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "fph": {
+            "connection": "fph", 
+            "frame": 5, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "h": {
+            "connection": "h", 
+            "frame": 13, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "k": {
+            "connection": "k", 
+            "frame": 3, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "oo": {
+            "connection": "oo", 
+            "frame": 19, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "p": {
+            "connection": "p", 
+            "frame": 1, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "rr": {
+            "connection": "rr", 
+            "frame": 9, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "shch": {
+            "connection": "shch", 
+            "frame": 8, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "ss": {
+            "connection": "ss", 
+            "frame": 7, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "td": {
+            "connection": "td", 
+            "frame": 2, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "th": {
+            "connection": "th", 
+            "frame": 6, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "ww": {
+            "connection": "ww", 
+            "frame": 12, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "y": {
+            "connection": "y", 
+            "frame": 11, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }
+    }, 
+    "tongue": {
+        "tongue_curl_down": {
+            "connection": "tongue_curl_down", 
+            "frame": 26, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_curl_up", 
+            "side": "center"
+        }, 
+        "tongue_curl_up": {
+            "connection": "tongue_curl_up", 
+            "frame": 25, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_curl_down", 
+            "side": "center"
+        }, 
+        "tongue_down": {
+            "connection": "tongue_down", 
+            "frame": 29, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_up", 
+            "side": "center"
+        }, 
+        "tongue_in": {
+            "connection": "tongue_in", 
+            "frame": 30, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_out", 
+            "side": "center"
+        }, 
+        "tongue_left": {
+            "connection": "tongue_left", 
+            "frame": 28, 
+            "mirror_parameter": "tongue_right", 
+            "multiplier": 1.5, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_out": {
+            "connection": "tongue_out", 
+            "frame": 24, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_in", 
+            "side": "center"
+        }, 
+        "tongue_right": {
+            "connection": "tongue_right", 
+            "frame": 27, 
+            "mirror_parameter": "tongue_left", 
+            "multiplier": 1.5, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_roof": {
+            "connection": "tongue_roof", 
+            "frame": 21, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_teeth": {
+            "connection": "tongue_teeth", 
+            "frame": 22, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_throat": {
+            "connection": "tongue_throat", 
+            "frame": 20, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_twist_left": {
+            "connection": "tongue_twist_left", 
+            "frame": 32, 
+            "mirror_parameter": "tongue_twist_right", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_twist_right": {
+            "connection": "tongue_twist_right", 
+            "frame": 31, 
+            "mirror_parameter": "tongue_twist_left", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }, 
+        "tongue_up": {
+            "connection": "tongue_up", 
+            "frame": 23, 
+            "mirror_parameter": null, 
+            "multiplier": 1.0, 
+            "opposite_parameter": "tongue_down", 
+            "side": "center"
+        }, 
+        "tongue_wide": {
+            "connection": "tongue_wide", 
+            "frame": 33, 
+            "mirror_parameter": "tongue_twist_right", 
+            "multiplier": 1.0, 
+            "opposite_parameter": null, 
+            "side": "center"
+        }
+    }
+}
