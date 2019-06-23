@@ -9,7 +9,8 @@ import maya.cmds as cmds
 import os
 
 #Bungie python imports
-import model.blendnode.BlendShapeNode
+import model.blendnode
+import metautil.node_attributes
 
 class Mesh(object):
 	'''This is a mesh that is a blendshape.  Does not need to be connected to the rig.'''
@@ -82,6 +83,11 @@ class Mesh(object):
 		:return: Opposite mesh that is wrapped in an instance of the class
 		'''
 		if base_mesh and opposite_pose:
+
+			# locked attributes
+			locked_attrs = metautil.node_attributes.get_lock_attributes(base_mesh)
+			metautil.node_attributes.lock_attributes(base_mesh, lock=False)
+
 			# target mesh is the one that will recieve the blendshape and be mirrored
 			target = pm.duplicate(base_mesh, returnRootsOnly=1, name='target')
 			# the invShape mesh is the one that will be the final inverted blenshape
@@ -112,8 +118,10 @@ class Mesh(object):
 
 			opposite_str = str(opposite_pose)
 			if pm.objExists(opposite_pose):
-				opposite_pose.delete()
+				pm.delete(opposite_pose)
 			opposite_pose = Mesh(pm.rename(invShape, opposite_str), skip_dialog)
+
+			metautil.node_attributes.lock_attributes_dict(base_mesh, locked_attrs)
 
 			return opposite_pose
 		return

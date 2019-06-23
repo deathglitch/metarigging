@@ -1,4 +1,5 @@
 #Source code for some common Maya/PyQt functions we will be using
+import platform
 import shiboken2
 #sip.setapi('QString', 2)
 #sip.setapi('QVariant', 2)
@@ -31,4 +32,20 @@ def to_qt_object(maya_name):
 		return shiboken2.wrapInstance(long(control), qtwidgets.QWidget)
 
 
+class MetaWindow(qtwidgets.QDialog):
 
+	def __init__(self, window_name, parent=get_maya_window()):
+		super(MetaWindow, self).__init__(parent)
+		if not platform.system() =='Windows':
+			self.setWindowFlags(qtcore.Qt.Tool)
+		self.window_name = window_name
+
+		# window settings
+		self.settings = qtcore.QSettings('MetaTools', self.window_name)
+		geometry = self.settings.value('geometry', '')
+		self.restoreGeometry(geometry)
+
+	def closeEvent(self, event):
+		geometry = self.saveGeometry()
+		self.settings.setValue('geometry', geometry)
+		super(MetaWindow, self).closeEvent(event)
