@@ -7,6 +7,7 @@ import PySide2.QtCore as qtcore
 import PySide2.QtGui as qtgui
 from PySide2 import QtWidgets as qtwidgets
 import maya.OpenMayaUI as apiui
+from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
 def get_maya_window():
 	"""
@@ -32,13 +33,15 @@ def to_qt_object(maya_name):
 		return shiboken2.wrapInstance(long(control), qtwidgets.QWidget)
 
 
-class MetaWindow(qtwidgets.QDialog):
+class MetaWindow(MayaQWidgetDockableMixin, qtwidgets.QDialog):
 
 	def __init__(self, window_name, parent=get_maya_window()):
 		super(MetaWindow, self).__init__(parent)
-		if not platform.system() =='Windows':
+		if not platform.system() == 'Windows':
 			self.setWindowFlags(qtcore.Qt.Tool)
 		self.window_name = window_name
+
+		#self.window_open=None
 
 		# window settings
 		self.settings = qtcore.QSettings('MetaTools', self.window_name)
