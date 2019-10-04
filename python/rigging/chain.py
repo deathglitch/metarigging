@@ -18,18 +18,18 @@ class Chain():
                 
         return list(set(start_joint, chain_between, end_joint))
 
-def create_duplicate_chain(start_joint, end_joint, suffix = 'dupe'):
-    chain_between = miscutil.get_nodes_between(start_joint, end_joint)
-    parent = None
+def create_duplicate_chain(start_joint, end_joint, suffix = 'dupe', criteria = lambda x: True):
+    chain_between = miscutil.get_nodes_between(start_joint, end_joint, criteria)
+    parent_node = None
     new_chain = []
     for joint in chain_between:
         new_joint = pm.duplicate(joint, po=1)[0]
         new_joint = pm.PyNode(new_joint)
         new_joint.rename(miscutil.get_name_root(joint.nodeName()) + '_' + suffix)
         new_chain.append(new_joint)
-        if parent:
-            pm.parent(new_joint, parent)
-        parent = new_joint
+        if parent_node:
+            pm.parent(new_joint, parent_node)
+        parent_node = new_joint
     return new_chain
 
         

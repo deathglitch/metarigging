@@ -1,6 +1,7 @@
 import pymel.core as pm
 import metautil
 import metautil.miscutil as miscutil
+import metautil.nsutil as nsutil
 
 class Grip():
     
@@ -14,7 +15,7 @@ class Grip():
         self.pynode = node
     
     @staticmethod
-    def create(driven_node, name_prefix='gr_', name_root=None, strip_prefix=0, shape=None, zero_transform=True):
+    def create(driven_node, name_prefix='gr_', name_root=None, strip_prefix=0, maintain_shape_offset = False, shape=None, point = True, orient = True, scale = 2, zero_transform=True):
         '''Creates a grip object matching the input driven_node. If no shape is specified a cube will be created.
         '''
         grip = None
@@ -36,20 +37,29 @@ class Grip():
         grip.radius.set(keyable = False, channelBox = False)
         grip = Grip(grip)
         '''
-        grip = pm.joint( n= '{0}{1}'.format(name_prefix, name_root) )
-        pm.addAttr( grip, at='bool', ln='is_grip', dv=True)
+        grip = pm.joint(n= '{0}{1}'.format(name_prefix, name_root))
+        grip.rotateOrder.set(driven_node.rotateOrder.get())
+        miscutil.align_point_orient(grip, driven_node, point = point, orient = orient)
+        pm.makeIdentity(grip, apply = True, t = 0, r = 1, s = 0, n = 0)
         
+        if isinstance(driven_node, pm.nt.Joint):
+            metautil.inherit_fbik_attrs(driven_node, grip)
+            
         #add shape node
         if not shape:
-            shape = fit_box_shape(driven_node, 2)
+            #shape = fit_box_shape(driven_node, width = scale)
+            shape = pm.polyCube(w=scale, h=scale, d=scale, sx=1, sy=1, sz=1, ax=[0, 1, 0], cuv=4, ch=0)[0]
+            pm.makeIdentity(shape, apply=True, t=0, r=0, s=1, n=0)	
         
-        shape = swap_shape_node(grip, shape)
-        miscutil.align_point_orient(grip, driven_node)
-        pm.makeIdentity(grip, apply = True, t = 0, r = 1, s = 0, n = 0)
+        if maintain_shape_offset:
+            shape = parent_shape_node(shape, grip, maintain_offset=maintain_shape_offset)
+        else:
+            shape = swap_shape_node(grip, shape)
         
         if zero_transform:
             metautil.add_zero_transform(grip)
 
+        pm.addAttr(grip, at='bool', ln='is_grip', dv=True)
         grip.radius.set(keyable = False, channelBox = False)
         grip = Grip(grip)
         return grip
@@ -59,36 +69,115 @@ class Grip():
         box = add_box_shape_ratio(target, 1)
         miscutil.align_point_orient(target, box)
         return box
+
+    @staticmethod
+    def create_grip_ratio(target, ratio = 0.5, name_root = '', point = True, orient = True, scale = 1, zero_transform=True):
+        shape = metautil.create_box_at_object(target, ratio = ratio)
+        grip = Grip.create(driven_node = target, shape = shape, name_root = name_root, maintain_shape_offset=True, point=point, orient=orient, scale=scale, zero_transform=zero_transform)
+        return grip
         
     def lock_and_hide_attrs(self, attrs):
         miscutil.lock_and_hide_attrs(self, attrs)
         return
         
     def get_grip_layer(self):
-        return
+        return self.grip_layer.get()
     
-    def set_grip_layer(self):
-        return
+    def set_grip_layer(self, layer_name):
+        self.grip_layer.set(layer_name)
+        return layer_name
         
     def set_as_detail(self):
         return
         
     def setParent(self, object):
+        child = self
+        if metautil.has_zero_transform(self):
+            child = self.get_zero_transform()
+        pm.PyNode(child).setParent(object)
         return
         
     def get_zero_transform(self):
         return self.zero_transform.listConnections()[0]
         
     def add_control_transform(self):
-        return
+        return metautil.add_control_transform(self)
         
     def replace_shape(self, new_shape):
+        all_shapes = swap_shape_node(self.pynode, new_shape)
         return
         
-    def duplicate_grip_shape(self, flag = None):
-        return
+    def duplicate_grip_shape(self, grip = None):
+        buffer = []
+        if not grip:
+            if not len(pm.ls(sl=True)):
+                raise Value('duplicate_grip_shape: nothing selected or specified to duplicate.')
+            grip = pm.ls(sl=True)[0]
+            grip = pm.PyNode(grip)
+        if not flag.hasAttr('is_grip'):
+            raise StandardError ('duplicate_grip_shape: requires one grip to be selected.')
         
-    def mirror_grip_shape(self, flag = None):
+        name_root = miscutil.get_name_root(grip)
+        buffer = pm.duplicate(grip, returnRootsOnly=True)
+        duplicate =buffer[0]
+        transform = pm.createNode('transform', name='{0}_transform'.format(name_root))
+        
+        grip_shapes = pm.listRelatives(grip, pa=True, shapes=True)
+        grip_shape = ""
+        for grip_shape in grip_shapes:
+            grip_shape = pm.PyNode(grip_shape)
+            if not grip_shape.hasAttr('do_not_touch'):
+                pm.parent(grip_shape, transform, shape=True, addObject=True)
+                
+        buffer = pm.duplicate(transform, returnRootsOnly=True)
+        transform_duplicate = buffer[0]
+        
+        pm.delete(duplicate, transform)
+        pm.select(transform_duplicate, r=True)
+
+        return transform_duplicate	
+        
+    def mirror_grip_shape(self, grip = None):
+        if not grip:
+            if not len(pm.ls(sl=True)):
+                raise StandardError('mirror_grip_shape: nothing selected or specified to mirror.')
+            grip = pm.ls(sl=True)[0]
+            grip = pm.PyNode(grip)
+        side = grip.getAttr('side')
+        self.duplicate_grip_shape(grip=grip)
+        dupe = pm.ls(sl=True)[0]
+        
+        pm.rotate(180, 0, 0)
+        pm.scale(-1, 1, 1)
+        pm.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
+        
+        dupe_shape = pm.listRelatives(dupe, pa=True, shapes=True)[0]
+        dupe_shape = pm.PyNode(dupe_shape)
+        if side == 1:
+            dupe_shape.setAttr('overrideEnabled', 1)
+            dupe_shape.setAttr('overrideColor', 13)
+        if side == 2:
+            dupe_shape.setAttr('overrideEnabled', 1)
+            dupe_shape.setAttr('overrideColor', 14)
+        
+        ns = nsutil.get_namespace(grip)
+        nsp = ""
+        if ns is not ":": nsp = '{0}:'.format(ns)
+        name_root = grip.stripNamespace()[4:]
+        opposite = ""
+        if side == 1:
+            opposite = '{0}gr_r_{1}'.format(nsp, name_root)
+        if side == 2:
+            opposite = '{0}gr_l_{1}'.format(nsp, name_root)
+        if opposite != "":
+            old_shapes = pm.listRelatives(opposite, shapes=True)
+            for old_shape in old_shapes:
+                old_shape = pm.PyNode(old_shape)
+                opposite = pm.PyNode(opposite)
+                if not old_shape.hasAttr('do_not_touch'):
+                    parent_shape_node(dupe, opposite)
+
+        pm.select(cl=True)
         return
         
     def __getattr__(self, attrname):
@@ -217,6 +306,23 @@ def swap_shape_node(node, new_shape):
     pm.delete(new_shape)
     return shape
     
-
+def parent_shape_node(source, target, maintain_offset=False, replace=True, freeze_transform=True, delete_original=True):
+    if freeze_transform:
+        pm.makeIdentity(source, apply=1, t=1, r=1, s=1)
+        
+    if maintain_offset:
+        pm.parent(source, target)
+        pm.makeIdentity(source, apply=1, t=1, r=1, s=1)
+        pm.parent(source, w=True)
+    
+    if replace:
+        old_shapes = target.getShapes()
+        if old_shapes:
+            pm.delete(old_shapes)
+        
+    new_shape = pm.parent(source.getShapes(), target, add=1, s=1)[0]
+    if delete_original:
+        pm.delete(source)
+    return new_shape
     
     

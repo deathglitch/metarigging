@@ -95,11 +95,11 @@ class IKComponent(keyablecomponent.KeyableComponent):
             miscutil.reset_attrs(grip)
             
     def attach_to_component(self, attach_component, location, point = True, orient = True):
-        attach_component = component.Component(attach_component)
+        #attach_component = component.Component(attach_component)
         if not isinstance(attach_component, component.Component):
             raise StandardError("can't connect to metanode, {0}, it is not a component".format(attach_component))
         parent_node = attach_component._find_attach_point(location)
-        grip_group = self.get_grip_group()
+        grip_group = self.get_ctrls_group()
         attrs = grip_group.translate.children() + grip_group.rotate.children()
         miscutil.unlock_and_show_attrs(attrs)
         if point:
@@ -126,7 +126,7 @@ class IKComponent(keyablecomponent.KeyableComponent):
         return
         
     def attach_to_joint(self, attach_joint, point = True, orient = True):
-        grip_group = self.get_grip_group()
+        grip_group = self.get_ctrls_group()
         attrs = grip_group.translate.children() + grip_group.rotate.children()
         miscutil.unlock_and_show_attrs(attrs)
         if point:

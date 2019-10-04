@@ -4,24 +4,25 @@ import metautil.miscutil as miscutil
 import metautil.rigutil as rigutil
 
 def rig_fk_chain(start_joint, end_joint, root_zero_transform = True, children_zero_transforms = True):
-    start_joint = pm.PyNode(start_joint)
-    end_joint = pm.PyNode(end_joint)
+    #start_joint = pm.PyNode(start_joint)
+    #end_joint = pm.PyNode(end_joint)
     chain = miscutil.get_nodes_between(start_joint, end_joint, lambda x: isinstance(x, pm.nt.Joint))
     grips = []
     parent_consts = []
     last = None
     for x, joint in enumerate(chain[:-1]):
-        name = pm.PyNode(joint).nodeName()
+        name = joint.nodeName()
         name = miscutil.get_name_root(name).replace('_dupe', "")[2:]
         grip_node = ""
         if x == 0:
-            grip_node = grip.Grip.create(joint, name_root = name, zero_transform = root_zero_transform)
+            grip_node = grip.Grip.create_grip_ratio(joint, name_root = name, zero_transform = root_zero_transform)
         else:
-            grip_node = grip.Grip.create(joint, name_root = name, zero_transform = children_zero_transforms)
+            grip_node = grip.Grip.create_grip_ratio(joint, name_root = name, zero_transform = children_zero_transforms)
 
         const = pm.parentConstraint(grip_node, joint, w=1, mo=1)
         if last:
-            rigutil.get_zero_transform(grip_node).setParent(last)
+            #rigutil.get_zero_transform(grip_node).setParent(last)
+            grip_node.setParent(last)
         last = grip_node
         grips.append(grip_node)
         parent_consts.append(const)

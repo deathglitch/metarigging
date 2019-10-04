@@ -112,7 +112,7 @@ class MetaNode(object):
         
     def __getattr__(self, attrname):
         if attrname == 'pynode':
-            raise AttributeError("this instance of {0} has no pynode".format(self.__class__.__name__))
+            raise AttributeError("This instance of {0} has no pynode.".format(self.__class__.__name__))
         return getattr(self.pynode, attrname)
      
     def __melobject__(self):

@@ -3,6 +3,7 @@ import grip
 import metautil.miscutil as miscutil
 import metautil.rigutil as rigutil
 import metautil.shapeutil as shapeutil
+import metautil
 
 def rig_ik_rp_chain(start_joint, end_joint, switch=False, ik_grip_orient = None, ik_grip_rotate_order = None, region = None):
     '''
@@ -71,8 +72,9 @@ def rig_ik_rp_chain(start_joint, end_joint, switch=False, ik_grip_orient = None,
     pv_line.inheritsTransform.set(0)
     # zero group
     ik_zero_group = pm.group(name = ik.shortName() + "_zero_transform", em = True)
-    miscutil.align(ik, ik_zero_group)
     ik.setParent(ik_zero_group)
+    #miscutil.align_point_orient(ik, ik_zero_group)
+
     # constraints
     pv_constraint = pm.poleVectorConstraint(pv_grip, ik, w = 1)
     ik_constraint = pm.parentConstraint(ik_grip, ik_zero_group, w = 1, mo = 1)
@@ -101,25 +103,25 @@ def rig_ik_rp_chain(start_joint, end_joint, switch=False, ik_grip_orient = None,
         pm.aimConstraint(aiming_loc, matching_loc, offset = [0, 0, 0], w = 1, aimVector = x_match_vector, upVector = y_match_vector, worldUpType = "scene")
         #align the zero group then the ik_grip
         zero_transform = ik_grip.get_zero_transform() 
-        old_pos_loc = bngutil.create_locator_at_object(end_joint)
-        bngutil.align(matching_loc, zero_transform, point = False, orient = True)
-        bngutil.align(matching_loc, ik_grip, point = False, orient = True)
+        old_pos_loc = metautil.create_locator_at_object(end_joint)
+        metautil.align_point_orient(matching_loc, zero_transform, point = False, orient = True)
+        metautil.align_point_orient(matching_loc, ik_grip, point = False, orient = True)
         pm.makeIdentity(ik_grip, apply=False, t = True, r = True, s = False, n = False)
-        bngutil.align(old_pos_loc, ik_grip, point = False, orient =True)
+        metautil.align_point_orient(old_pos_loc, ik_grip, point = False, orient =True)
         pm.delete([matching_loc, aiming_loc, old_pos_loc])
     rotate_order_dict = {'xyz':0,'yzx':1,'zxy':2,'xzy':3,'yxz':4,'zyx':5}
     if ik_grip_rotate_order and rotate_order_dict.keys():
-        temp_loc = miscutil.create_locator_at_object(ik_grip)
+        temp_loc = metautil.create_locator_at_object(ik_grip)
         ik_grip.rotateOrder.set(rotate_order_dict[ik_grip_rotate_order])
-        miscutil.align(temp_loc, ik_grip, point = False, orient = True)
+        metautil.align_point_orient(temp_loc, ik_grip, point = False, orient = True)
         pm.delete(temp_loc)
         
     #if 4 joint chain last joint rotation moves with ik grip
     if len(chain) == 4:
         pm.orientConstraint(ik_grip, end_joint, mo = 1, w = 1)
                 
-    pv_grip.setParent(pv_grip.get_zero_transform())
-    ik_grip.setParent(ik_grip.get_zero_transform())
+    #pv_grip.setParent(pv_grip.get_zero_transform())
+    #ik_grip.setParent(ik_grip.get_zero_transform())
 
     #create dictionary
     return_dictionary['chain'] = chain

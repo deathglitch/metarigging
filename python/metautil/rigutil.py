@@ -187,7 +187,7 @@ def add_zero_transform(node):
         if node_parent:
             transform.setParent(node_parent)
         node.setParent(transform)
-        if isinstance(node, pm.nodetypes.Joint):
+        if isinstance(node, pm.nt.Joint):
             node.jointOrient.set([0,0,0])
         node.addAttr('zero_transform', at = 'message')
         transform.addAttr('zero_object', dt = 'string')
@@ -210,3 +210,70 @@ def get_zero_transform(node):
     if has_zero_transform(node):
         return node.zero_transform.listConnections()[0]
     return None
+
+def create_box_at_object(object,  width = 1, ratio = None, down_axis = None,):
+    object = pm.PyNode(object)
+    
+    if not down_axis:
+        down_axis = get_down_axis(object)
+    
+    #create base cube
+    cube = pm.polyCube(w=1, h=1, d=1, sx=1, sy=1, sz=1, ax=(0,1,0), cuv=4, ch=0)[0]#default down axis of cube is "y"
+    cube.rotateOrder.set(object.rotateOrder.get())
+    cube.translateY.set(0.5)
+    pm.xform(cube, worldSpace=True, pivots=(0, 0, 0))
+    pm.makeIdentity(cube, apply=True, t=1, r=1, s=1, n=0)
+    #rename cube
+    name_root = pm.PyNode(object).stripNamespace()
+    if name_root[:2] == "b_":	name_root = name_root[2:] # ###a-jjones $HACK seems hacky, special case handling on low level cmd
+    cube = pm.rename(cube, (name_root + '_box'))
+    #align cube
+    miscutil.align(object, cube)
+    cube.setParent(object)
+    #make "y" down axis of cube, match down axis of object
+    if down_axis == 'y': 	pass
+    if down_axis == 'x':	cube.rotate.set(0, 0, -90)
+    if down_axis == 'z':	cube.rotate.set(90, 0, 0)
+    if down_axis == '-y':	cube.rotate.set(180, 0, 0)
+    if down_axis == '-x':	cube.rotate.set(0, 0, 90)
+    if down_axis == '-z':	cube.rotate.set(-90, 0, 0)
+    #scale cube
+    children = object.getChildren(type = "joint")
+    dist = miscutil.distance_between(object, children[0])
+    cube.scale.set(width, dist, width)
+    if ratio:
+        cube.scale.set(dist*ratio, dist, dist*ratio)
+    #finalize cube
+    pm.makeIdentity(cube, apply=True, r=1, s=1)
+    pm.parent(cube, world=True)
+    
+    return cube
+    
+def get_down_axis(node):
+    node = pm.PyNode(node)
+    children = node.getChildren()
+    best_axis = None
+    best_axis_dist = 0
+    axes = ["x", "y", "z"]
+    for child in children:
+        if isinstance(child, pm.nodetypes.Transform):
+            trans = child.translate.get()
+            for inc, axis in enumerate(axes):
+                if abs(trans[inc]) > abs(best_axis_dist):
+                    best_axis = axis
+                    best_axis_dist = trans[inc]
+    
+    if not best_axis:
+        best_axis = "x"
+    
+    if best_axis_dist < 0:
+        best_axis = "-" + best_axis
+    
+    return best_axis
+    
+def inherit_fbik_attrs(from_node, to_node):
+	from_node = pm.PyNode(from_node)
+	to_node = pm.PyNode(to_node)
+	side = to_node.setAttr('side', from_node.getAttr('side'))
+	type = to_node.setAttr('type', from_node.getAttr('type'))
+	other_type = to_node.setAttr('otherType', from_node.getAttr('otherType'))

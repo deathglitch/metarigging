@@ -2,11 +2,12 @@ import pymel.core as pm
 
 import metanode_base
 import metautil
+import metautil.miscutil as miscutil
 
 class Component(metanode_base.MetaNode):
 
     @staticmethod
-    def create(metanode_parent, metanode_type, version, side, region):
+    def create(metanode_parent, metanode_type, version, side, region, component_pivot = None):
         name = '{0}_{1}_{2}'.format('comp', side, region)
         node = metanode_base.MetaNode.create(name = name, type = metanode_type, parent = metanode_parent, version = version)
         #pm.rename(node, '{0}'.format(metautil.get_name_root(node)))
@@ -15,6 +16,8 @@ class Component(metanode_base.MetaNode):
         node.addAttr('region', dt = 'string')
         node.region.set(region)
         do_not_touch_group = pm.group(em = 1, name = 'DO_NOT_TOUCH_{0}_{1}'.format(side, region))
+        if component_pivot:
+            miscutil.align(component_pivot, do_not_touch_group)
         pm.makeIdentity(do_not_touch_group, apply=1, t=1, r=1, s=1)
         do_not_touch_group.v.set(0)
         metautil.lock_all_keyable_attrs(do_not_touch_group)
@@ -50,16 +53,26 @@ class Component(metanode_base.MetaNode):
         
     def get_attach_point_location(self):
         result = None
+        point = self.attach_point_location.get()
+        if point:
+            result = point
+        '''
         parent = attachPointLocation.listConnections()
         if parent:
             result = metanode_base.MetaNode(parent[0])
+        '''
         return result
     
     def get_attach_orient_location(self):
         result = None
+        orient = self.attach_orient_location.get()
+        if orient:
+            result = orient
+        '''
         parent = attachOrientLocation.listConnections()
         if parent:
             result = metanode_base.MetaNode(parent[0])
+        '''
         return result
         
     def get_side(self):

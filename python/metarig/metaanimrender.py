@@ -21,9 +21,9 @@ class MetaAnimRender(metanode.MetaNode):
         #group_skins
         group_skins = pm.group(em=1, n='group_skins')
         group_skins.inheritsTransform.set(0)
-        metarender.connect_node_to_metanode(group_skins, metarender, 'group_skins')
+        metarender.connect_node_to_metanode(group_skins, 'group_skins')
         
-        metarender.connect_node_to_metanode(meta_parent, 'meta_children')
+        meta_parent.connect_node_to_metanode(metarender, 'meta_children')
 
         return metarender
         

@@ -67,6 +67,7 @@ for mod in [m for m in sys.modules.keys() if m != __name__ and sys.modules[m] !=
     del(sys.modules[mod])
     
 from basic_rig import *
+from greydude_rig import *
 from simple_rig import *
 
 #deleting classes, function, modules not in module

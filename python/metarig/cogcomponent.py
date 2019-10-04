@@ -1,79 +1,55 @@
 import pymel.core as pm
 import component
 import keyablecomponent
-import metautil
 import metautil.nsutil as nsutil
 import metautil.miscutil as miscutil
 import metautil.rigutil as rigutil
 import rigging
 
-class FKComponent(keyablecomponent.KeyableComponent):
+class CogComponent(keyablecomponent.KeyableComponent):
     LATEST_VERSION = 1
     
     @staticmethod
-    def create(metanode_parent, start_joint, end_joint, side, region, grip_group_pivot = None, lock_child_rotate_axes=[], lock_child_translate_axes=['tx', 'ty', 'tz'], lock_root_rotate_axes=[], lock_root_translate_axes=['tx', 'ty', 'tz'], children_zero_transforms = True, constrain_translate = True, constrain_rotate = True):
+    def create(metanode_parent, start_joint, end_joint, side, region, scale=10):
         orig_ns = pm.Namespace.getCurrent()
         new_ns = nsutil.get_namespace_object(metanode_parent)
         new_ns.setCurrent()
         
-        fknode = keyablecomponent.KeyableComponent.create(metanode_parent, FKComponent.__name__, FKComponent.LATEST_VERSION, side, region)
+        cognode = keyablecomponent.KeyableComponent.create(metanode_parent, CogComponent.__name__, CogComponent.LATEST_VERSION, side, region, component_pivot = start_joint)
         chain_between = miscutil.get_nodes_between(start_joint, end_joint, criteria = lambda x: isinstance(x, pm.nodetypes.Joint))
         
         #metanode_root = metaroot.get_metaroot(metanode_parent)
         
-        do_not_touch = fknode.get_do_not_touch()
-        ctrls_group = fknode.get_ctrls_group()
-        if grip_group_pivot:
-            miscutil.align(grip_group_pivot, ctrls_group)
-            
-        fk_chain = rigging.create_duplicate_chain(start_joint, end_joint)
-        fk_chain[0].setParent(do_not_touch)
-        fk_chain_result = rigging.rig_fk_chain(fk_chain[0], fk_chain[-1], children_zero_transforms = children_zero_transforms)
+        do_not_touch = cognode.get_do_not_touch()
+        ctrls_group = cognode.get_ctrls_group()
         
-        start_grip = fk_chain_result['grips'][0]
-        start_grip.setParent(ctrls_group)
+        cog_chain = rigging.create_duplicate_chain(start_joint, end_joint)
+        cog_chain_result = rigging.rig_cog_chain(cog_chain[0], cog_chain[-1], scale)
+
+        cog_grip = cog_chain_result['grips'][0]
+        cog_zero = rigutil.get_zero_transform(cog_grip)
+        pm.parent(cog_zero, ctrls_group)
+        cog_chain[0].setParent(do_not_touch)
         #do_not_touch.setParent(metanode_parent.get_do_not_touch_group())
         #ctrls_group.setParent(metanode_parent.get_ctrls_group())
         
-        fknode.connect_ordered_nodes_to_metanode(fk_chain_result['grips'], 'fk_grips')
-        fknode.connect_ordered_nodes_to_metanode(fk_chain, 'fk_chain')
-        fknode.connect_ordered_nodes_to_metanode(chain_between[:-1], 'bind_joints')
+        cognode.connect_node_to_metanode(cog_grip, 'cog_grip')
+        cognode.connect_ordered_nodes_to_metanode(cog_chain, 'cog_chain')
+        cognode.connect_ordered_nodes_to_metanode(chain_between[:-1], 'bind_joints')
         
-        ctrls = fk_chain_result['grips']
-        for x in range(len(ctrls)):
-            locked_attrs = ['sx', 'sy', 'sz', 'v']
-            if x == 0:
-                locked_attrs = locked_attrs + lock_root_rotate_axes + lock_root_translate_axes
-            elif x > 0:
-                locked_attrs = locked_attrs + lock_child_rotate_axes + lock_child_translate_axes
-
-            miscutil.lock_and_hide_attrs(ctrls[x], locked_attrs)
-        
-        for x, joint in enumerate(fk_chain_result['chain'][:-1]):
-            if constrain_translate and constrain_rotate:
-                pm.parentConstraint(joint, chain_between[x])
-            elif constrain_translate and not constrain_rotate:
-                pm.pointConstraint(joint, chain_between[x])
-            elif not constrain_translate and constrain_rotate:
-                pm.orientConstraint(joint, chain_between[x])
-
+        cog_grip.lock_and_hide_attrs(['sx', 'sy', 'sz', 'v'])
+        pm.parentConstraint(cog_chain[0], chain_between[0])
         orig_ns.setCurrent()
         
-        return fknode
+        return cognode
         
     def get_grips(self):
-        grips = self.fk_grips.listConnections()
+        grips = self.cog_grip.listConnections()
         grips = map(lambda x: rigging.Grip(x), grips)
-        grips.reverse() #this makes the fk root grip control the last in the list
         return grips
-
-    def get_start_grip(self):
-        grips = self.get_grips()
-        return grips[-1]
-
-    def get_end_grip(self):
-        grips = self.get_grips()
-        return grips[0]
+        
+    def get_cog_grip(self):
+        return self.cog_grip.listConnections()[0]
 
     def get_bind_joints(self):
         return self.bind_joints.listConnections()
@@ -126,7 +102,7 @@ class FKComponent(keyablecomponent.KeyableComponent):
     def attach_to_joint(self, attach_joint, point = True, orient = True):
         grip_group = self.get_ctrls_group()
         attrs = grip_group.translate.children() + grip_group.rotate.children()
-        miscutil.unlock_and_show_attrs(attrs)
+        metautil.unlock_and_show_attrs(attrs)
         if point:
             #delete old constraint
             grip_cons = grip_group.tx.listConnections(d=0) + grip_group.ty.listConnections(d=0) + grip_group.tz.listConnections(d=0)
@@ -152,28 +128,22 @@ class FKComponent(keyablecomponent.KeyableComponent):
         
     def attach_to_skeleton(self, namespace = None):
         '''Attaches grips to a baked skeleton in the specified namespace'''
-        fk_grips = map(lambda x: rigging.Grip(x), self.fk_grips.listConnections())
+        cog_grip = map(lambda x: rigging.Grip(x), self.cog_grip.listConnections())
         bind_joints = self.bind_joints.listConnections()
         if namespace is None:
             namespace = miscutil.get_namespace(bind_joints[0])
         bind_joints = map(lambda x: x.swapNamespace(namespace), bind_joints)
 
-        constraints = []
-        for inc in xrange(len(fk_grips)):
-            grip = fk_grips[inc]
-            jnt = bind_joints[inc]
-            const = miscutil.parent_constraint_safe(jnt, grip, 0)
-            constraints.append(const)
+        const = miscutil.parent_constraint_safe(bind_joints[0], cog_grip, 0)
+        constraints = [const]
             
-        return [fk_grips, constraints]
+        return [cog_grips, constraints]
         
-    def bake_and_detach(self, objects, constraints, attrs = None):
+    def bake_and_detach(self, objects, constraints):
         '''Bakes grips and detaches from baked skeleton.'''
-        if not attrs:
-            attrs = ["rx", "ry", "rz"]
         start_time = miscutil.get_start_time()
         end_time = miscutil.get_end_time()
-        miscutil.bake(objects = objects, attrs = attrs, time = (start_time, end_time))
+        miscutil.bake(objects = objects, time = (start_time, end_time))
         pm.delete(constraints)
         return
         
@@ -185,19 +155,7 @@ class FKComponent(keyablecomponent.KeyableComponent):
         return
         
     def _find_attach_point(self, location):
-        if location.lower() == 'start':
-            return self.get_bind_joints()[0]
-        elif location.lower() == 'mid' or location.lower() == 'middle':
-            bind_joints = self.get_bind_joints()
-            return bind_joints[len(bind_joints)/2]
-        elif location.lower() == 'end':
-            end = self.get_bind_joints()[-1]
-            return end
-        elif location.lower() == 'second_from_last':
-            second_from_last = self.get_bind_joints()[-2]
-            return second_from_last
-        else:
-            raise StandardError('location given should be "start", "middle" or "end"')
+        return self.get_grips()[-1]
     
     def remove(self, bake = False):
         '''remove everything about this rig implementation'''

@@ -8,16 +8,22 @@ _safe_import_list = [_x.__name__ for _x in _module, os, sys, inspect]
 for mod in [m for m in sys.modules.keys() if m != __name__ and sys.modules[m] != None and m.startswith(__name__) and len(m.split(__name__ + ".")[-1].split(".")) == 1 and (not sys.modules[m].__file__.split(os.path.sep)[-1].startswith("__init__"))]:
     del(sys.modules[mod])
     
+from cogcomponent import *
 from component import *
 from fkcomponent import *
+from fkgroupcomponent import *
 from fkikcomponent import *
 from ikcomponent import *
+from gripmaterials import *
 from keyablecomponent import *
 from metaanimrender import *
 from metaanimrig import *
 from metanode_base import *
 from metaroot import *
-from gripmaterials import *
+from quadrupedlegcomponent import *
+from reversecomponent import *
+from reversefootcomponent import *
+from rfkcomponent import *
 
 #deleting classes, function, modules not in module
 for _function_name in [_member[0] for _member in inspect.getmembers(_module, inspect.isfunction) if not _member[1].__module__.startswith(__name__)]:

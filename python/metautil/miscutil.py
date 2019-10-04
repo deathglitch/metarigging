@@ -90,7 +90,36 @@ def lock_all_keyable_attrs(node, hidden = False):
             keyable_attr.lock()
             if hidden:
                 keyable_attr.setKeyable(0)
+                
+def lock_transform_attrs(object):
+    for attr in ['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz']:
+        object.attr(attr).lock()
+        object.attr(attr).setKeyable(0)
+        
+def unlock_transform_attrs(object):
+    for attr in ['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz']:
+        object.attr(attr).unlock()
+        object.attr(attr).setKeyable(1)
 
+def unlock_and_show_attrs(attr_list):
+    attr_list = map(lambda attr: pm.PyNode(attr), attr_list)
+    
+    for attr in attr_list:
+        attr.setKeyable(1)
+        attr.unlock()
+        
+def unlock_all_attrs(object, show=False):
+    if not pm.objExists(object):
+        raise pm.MayaNodeError('#unlock_all_attrs: ' + str(object) + ' doesnt exist.')
+    
+    object = pm.PyNode(object)
+    attrs = object.listAttr(locked = True)
+    
+    for attr in attrs:
+        attr.unlock()
+        if show:
+            attr.setKeyable(1)
+            
 def align_point_orient(source = "", destination = "", point = True, orient = True):
     # error checking
     if not source and not destination:
