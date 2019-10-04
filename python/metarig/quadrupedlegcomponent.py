@@ -11,7 +11,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
     LATEST_VERSION = 1
     
     @staticmethod
-    def create(metanode_parent, start_joint, end_joint, side, region, heel_chain_name='heel_contact', ball_chain_name='ball_contact', toe_chain_name='toe_contact', ball_lift_axis='x', toe_lift_axis='x', toe_pivot_axis='y', heel_lift_axis='x', foot_lean_axis='z', ball_pivot_axis='z'):
+    def create(metanode_parent, start_joint, end_joint, side, region, heel_chain_name='heel_contact_null', ball_chain_name='ball_contact_null', toe_chain_name='toe_contact_null', ball_lift_axis='x', toe_lift_axis='z', toe_pivot_axis='y', heel_lift_axis='x', foot_lean_axis='z', ball_pivot_axis='z'):
         orig_ns = pm.Namespace.getCurrent()
         new_ns = nsutil.get_namespace_object(metanode_parent)
         new_ns.setCurrent()
@@ -27,12 +27,12 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         foot_joint = joint_chain[2]
         toe_joint = joint_chain[3]
 
-        heel_contact_joint = [pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + heel_chain_name)]
-        ball_contact_joint = [pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + ball_chain_name)]
-        toe_contact_joint = [pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + toe_chain_name)]
+        heel_contact_joint = pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + heel_chain_name)
+        ball_contact_joint = pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + ball_chain_name)
+        toe_contact_joint = pm.PyNode(new_ns + ':b_' + side[:1].lower() + '_' + toe_chain_name)
 
         quadrupedlegnode = keyablecomponent.KeyableComponent.create(metanode_parent, QuadrupedLegComponent.__name__, QuadrupedLegComponent.LATEST_VERSION, side, region, component_pivot = hip_joint)
-        chain_between = joint_chain + heel_contact_joint + ball_contact_joint + toe_contact_joint
+        #chain_between = joint_chain + heel_contact_joint + ball_contact_joint + toe_contact_joint
         #metanode_root = metaroot.get_metaroot(metanode_parent)
         
         do_not_touch = quadrupedlegnode.get_do_not_touch()
@@ -53,7 +53,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
     
         ik, eff = pm.ikHandle( sol = 'ikRPsolver', sj = ik_thigh, ee = ik_foot, n='f_{0}_{1}_ikhandle'.format(side_prefix, region))
         ik.visibility.set(0)
-        #ik_parent_zero = metautil.add_zero_transform(ik)
+        ik_parent_zero = metautil.add_zero_transform(ik)
         
         #create reverse foot hierarchy
         pm.select(toe_joint, r=True)
@@ -137,7 +137,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         '''
         pv_grip_zero = pv_grip.get_zero_transform()
         pv_grip.visibility >> pv_line.visibility
-        pv_grip.overrideVisibility >> pv_grip.overrideVisibility
+        pv_grip.overrideVisibility >> pv_line.overrideVisibility
         pv_grip.overrideEnabled >> pv_line.overrideEnabled
         rigutil.inherit_fbik_attrs(calf_joint, pv_grip)
         
@@ -161,7 +161,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         pm.parent([ball_ik_zero], reverse_ball_contact)
         
         miscutil.safe_point_constraint(reverse_ankle_end, toe_ik_point_zero, mo=1)
-        miscutil.safe_parent_constraint(foot_ik_pivot_grip, ik_parent_zero, skipRotate = ['x', 'y', 'z'], mo=1)
+        miscutil.safe_parent_constraint(foot_ik_pivot_grip, ik_parent_zero, skip_rotate = ['x', 'y', 'z'], mo=1)
         miscutil.safe_parent_constraint(foot_ik_grip, reverse_ankle, mo=1)
         '''
         #reverse foot parenting
@@ -255,6 +255,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         #parenting
         fk_grips[0].setParent(ctrls_group)
         ik_zero_grp = foot_ik_grip.get_zero_transform()
+        ik_pivot_zero_grp = foot_ik_pivot_grip.get_zero_transform()
         pv_zero_grp = pv_grip.get_zero_transform()
         switch_zero_grp = switch_grip.get_zero_transform()
         pm.parent([pv_line], do_not_touch)
@@ -267,7 +268,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         foot_ik_grip.addAttr('heel_lift', k=True, at='double')
         foot_ik_grip.addAttr('foot_lean', k=True, at='double')
         
-        foot_ik_grip.ball_lift >> reverse_toe.attr('rotate'+ ball_lift_axis.upper()) #original was Z
+        foot_ik_grip.ball_lift >> reverse_ball_contact.attr('rotate'+ ball_lift_axis.upper()) #original was Z
         foot_ik_grip.toe_lift >> reverse_toe_contact.attr('rotate'+ toe_lift_axis.upper()) #original was Z
         foot_ik_grip.toe_pivot >> reverse_toe_contact.attr('rotate'+ toe_pivot_axis.upper()) #original was Z
         foot_ik_grip.heel_lift >> reverse_heel_contact.attr('rotate'+ heel_lift_axis.upper()) #original was z
@@ -275,7 +276,7 @@ class QuadrupedLegComponent(keyablecomponent.KeyableComponent):
         for reverse_foot_obj in [reverse_ankle, reverse_heel_contact, reverse_toe_contact, reverse_ball_contact, reverse_ankle_end]:
             miscutil.lock_and_hide_attrs(reverse_foot_obj, ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz", "v"])
         
-        #xnode connections
+        #metanode connections
         quadrupedlegnode.connect_node_to_metanode(ik, 'ik_leg_handle')
         quadrupedlegnode.connect_node_to_metanode(pv_grip, 'pv_grip')
         quadrupedlegnode.connect_node_to_metanode(pv_line, 'pv_line')
