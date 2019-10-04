@@ -1,4 +1,5 @@
 # manipulate node attributes
+import pymel.core as pm
 
 
 def lock_attributes(obj, attrs=None, lock=True):
@@ -56,3 +57,13 @@ def lock_attributes_dict(obj, dict):
 		else:
 			obj.attr(attr).unlock()
 	return
+
+def remove_user_attributes(mesh):
+	user_attrs = map(lambda x: x.split('.')[-1], mesh.listAttr(ud=True))
+	if user_attrs:
+		if not isinstance(mesh, pm.nt.Transform):
+			mesh = pm.PyNode(mesh)
+		for attribute in user_attrs:
+			mesh.deleteAttr(attribute)
+	return
+
